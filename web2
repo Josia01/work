@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Emerald 4 Hospitality Management Consult</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 L28 11 L16 30 L4 11 Z' fill='%230B2E22'/%3E%3Cpath d='M16 2 L10 11 L16 30 L22 11 Z M4 11 H28' fill='none' stroke='%23C9A227' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --emerald-950:#0A2A20;
+    --emerald-900:#0E3328;
+    --emerald-700:#16523F;
+    --emerald-600:#1F7A53;
+    --emerald-500:#2E9468;
+    --gold-600:#A8801C;
+    --gold-500:#C9A227;
+    --gold-300:#E3C567;
+    --ivory-100:#F8F4EA;
+    --ivory-200:#F1EAD8;
+    --sand-200:#EAE0C8;
+    --ink-900:#161510;
+    --ink-700:#34322B;
+    --ink-500:#5C594E;
+    --line:rgba(22,21,16,0.12);
+    --line-light:rgba(248,244,234,0.22);
+    --shadow-1: 0 24px 60px -24px rgba(10,42,32,0.35);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --maxw: 1200px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink-900);
+    background:var(--ivory-100);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block; max-width:100%; height:auto;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .icon-gem{width:1em; height:1em; display:inline-block; color:currentColor; flex-shrink:0;}
+
+  h1,h2,h3,h4{font-family:'Fraunces',serif; font-weight:600; color:var(--ink-900); line-height:1.08; letter-spacing:-0.01em;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--gold-600);
+  }
+  .eyebrow .icon-gem{color:var(--gold-500); font-size:11px;}
+  .eyebrow.on-dark{color:var(--gold-300);}
+  .section{padding:108px 0;}
+  .section-head{max-width:680px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,3.4vw,44px); margin-top:14px;}
+  .section-head p{margin-top:18px; font-size:17px; color:var(--ink-500); max-width:560px;}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease);}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:20px 0;
+    transition:background .35s var(--ease), padding .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .nav.scrolled{ background:rgba(10,42,32,0.94); backdrop-filter:blur(10px); padding:13px 0; box-shadow:0 8px 30px -10px rgba(0,0,0,0.4);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:24px;}
+  .brand{display:flex; align-items:center; gap:10px; color:var(--ivory-100);}
+  .brand .icon-gem{font-size:26px; color:var(--gold-400, var(--gold-500));}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-text strong{font-family:'Fraunces',serif; font-size:18px; letter-spacing:0.02em;}
+  .brand-text span{font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--sand-200); opacity:.8;}
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{
+    font-size:14px; font-weight:500; color:var(--ivory-200); opacity:.85;
+    position:relative; padding:4px 0;
+  }
+  .nav-links a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:var(--gold-500); transform:scaleX(0); transition:transform .3s var(--ease);}
+  .nav-links a:hover{opacity:1;}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold-500); color:var(--emerald-950);
+    font-size:13.5px; font-weight:600; padding:11px 20px; border-radius:999px;
+    border:1px solid var(--gold-500);
+    transition:background .25s var(--ease), color .25s var(--ease);
+  }
+  .nav-cta:hover{background:transparent; color:var(--gold-300); border-color:var(--gold-300);}
+  .burger{display:none; background:none; border:none; color:var(--ivory-100); font-size:24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh; display:flex; align-items:flex-end;
+    color:var(--ivory-100); overflow:hidden; padding-bottom:0;
+  }
+  .hero-bg{position:absolute; inset:0; z-index:0;}
+  .hero-bg img{width:100%; height:100%; object-fit:cover; filter:saturate(0.92) brightness(0.62);}
+  .hero-bg::after{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(120% 90% at 12% 100%, rgba(10,42,32,0.55) 0%, rgba(10,42,32,0.15) 45%, transparent 70%),
+      linear-gradient(180deg, rgba(10,42,32,0.55) 0%, rgba(10,42,32,0.35) 35%, rgba(10,42,32,0.92) 100%);
+  }
+  .facet-pattern{
+    position:absolute; inset:0; z-index:1; opacity:0.10; pointer-events:none;
+    background-image:
+      repeating-linear-gradient(60deg, transparent 0 38px, var(--gold-300) 38px 39px),
+      repeating-linear-gradient(-60deg, transparent 0 38px, var(--gold-300) 38px 39px);
+  }
+  .hero-content{position:relative; z-index:2; width:100%; padding:200px 0 56px;}
+  .hero-eyebrow{color:var(--gold-300); margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(38px, 6vw, 70px); max-width:880px; color:#fff;
+    font-weight:500;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold-300); font-weight:500;}
+  .hero p.lead{margin-top:24px; max-width:560px; font-size:18px; color:rgba(248,244,234,0.86);}
+  .hero-ctas{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px; border-radius:999px; font-size:14.5px; font-weight:600;
+    transition:transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold-500); color:var(--emerald-950);}
+  .btn-primary:hover{transform:translateY(-2px); background:var(--gold-300);}
+  .btn-ghost{border-color:rgba(248,244,234,0.45); color:#fff;}
+  .btn-ghost:hover{transform:translateY(-2px); border-color:var(--gold-300); color:var(--gold-300);}
+  .btn-dark{background:var(--emerald-950); color:var(--ivory-100);}
+  .btn-dark:hover{transform:translateY(-2px); background:var(--emerald-700);}
+
+  .stat-strip{
+    position:relative; z-index:2;
+    border-top:1px solid var(--line-light);
+    background:rgba(10,42,32,0.55);
+  }
+  .stat-strip .wrap{display:flex; flex-wrap:wrap; gap:18px 40px; padding:26px 32px; justify-content:space-between;}
+  .stat-item{display:flex; align-items:baseline; gap:10px; color:var(--ivory-200);}
+  .stat-item b{font-family:'Fraunces',serif; font-size:22px; color:var(--gold-300); font-weight:600;}
+  .stat-item span{font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; color:rgba(248,244,234,0.7);}
+
+  /* ---------- gem divider ---------- */
+  .gem-divider{display:flex; align-items:center; justify-content:center; gap:14px; color:var(--gold-500); margin:8px 0 40px;}
+  .gem-divider::before, .gem-divider::after{content:''; height:1px; width:64px; background:var(--line);}
+  .gem-divider .icon-gem{font-size:14px;}
+
+  /* ---------- WHAT WE DO ---------- */
+  .promise-grid{display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:28px; align-items:stretch;}
+  .promise-lead p{font-size:18px; color:var(--ink-700);}
+  .promise-card{
+    background:var(--ivory-100); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:32px; display:flex; flex-direction:column; gap:14px;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+  }
+  .promise-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-1); border-color:transparent;}
+  .promise-card .icon-gem{font-size:26px; color:var(--gold-500);}
+  .promise-card h3{font-size:21px; font-weight:600;}
+  .promise-card p{color:var(--ink-500); font-size:15px;}
+
+  /* ---------- WHO WE SERVE ---------- */
+  .who-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .who-card{
+    position:relative; border-radius:var(--radius-lg); overflow:hidden; aspect-ratio:3/4;
+    color:#fff; box-shadow:var(--shadow-1);
+  }
+  .who-card img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease);}
+  .who-card:hover img{transform:scale(1.07);}
+  .who-card::after{content:''; position:absolute; inset:0; background:linear-gradient(190deg, rgba(10,42,32,0.05) 30%, rgba(8,28,21,0.92) 100%);}
+  .who-card-content{position:absolute; left:0; right:0; bottom:0; padding:22px; z-index:2;}
+  .who-card-content .icon-gem{font-size:18px; color:var(--gold-300); margin-bottom:10px;}
+  .who-card-content h3{color:#fff; font-size:18px; margin-bottom:6px;}
+  .who-card-content p{font-size:13.5px; color:rgba(248,244,234,0.82);}
+  .who-footnote{margin-top:38px; font-size:15px; color:var(--ink-500); max-width:760px;}
+
+  /* ---------- SLIDESHOW / GALLERY ---------- */
+  .slideshow{position:relative;}
+  .slideshow-stage{
+    position:relative; height:clamp(340px, 56vw, 560px);
+    border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-1);
+    background:var(--emerald-950);
+  }
+  .slide{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity 1s var(--ease); z-index:1;}
+  .slide.active{opacity:1; visibility:visible; z-index:2;}
+  .slide img{width:100%; height:100%; object-fit:cover;}
+  .slide::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,42,32,0.05) 40%, rgba(8,28,21,0.88) 100%);}
+  .slide-caption{position:absolute; left:32px; right:32px; bottom:28px; z-index:3; color:#fff;}
+  .slide-caption .eyebrow{color:var(--gold-300); margin-bottom:8px;}
+  .slide-caption h3{color:#fff; font-size:clamp(20px,2.4vw,28px);}
+  .slide-counter{position:absolute; top:22px; right:28px; z-index:3; color:rgba(248,244,234,0.85); font-size:13px; letter-spacing:0.08em; font-weight:600;}
+  .slide-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border-radius:50%;
+    background:rgba(248,244,234,0.14); border:1px solid rgba(248,244,234,0.4); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:17px; z-index:4;
+    backdrop-filter:blur(6px); transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .slide-arrow:hover{background:var(--gold-500); color:var(--emerald-950); border-color:var(--gold-500);}
+  .slide-arrow.prev{left:18px;}
+  .slide-arrow.next{right:18px;}
+  .slide-dots{display:flex; justify-content:center; gap:10px; margin-top:22px;}
+  .slide-dot{width:9px; height:9px; border-radius:50%; background:var(--line); border:none; padding:0; transition:background .25s var(--ease), transform .25s var(--ease);}
+  .slide-dot.active{background:var(--gold-500); transform:scale(1.3);}
+  .slide-progress{position:absolute; left:0; bottom:0; height:3px; background:var(--gold-500); z-index:3; width:0%;}
+
+  /* ---------- CONSULTING TIMELINE ---------- */
+  .timeline{position:relative;}
+  .timeline-rail{position:absolute; left:27px; top:8px; bottom:8px; width:1px; background:var(--line);}
+  .tl-item{display:grid; grid-template-columns:56px 1fr; gap:28px; padding-bottom:46px; position:relative;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-num{
+    width:56px; height:56px; border-radius:50%; background:var(--emerald-950); color:var(--gold-300);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:600; font-size:17px;
+    position:relative; z-index:1; border:1px solid var(--gold-600);
+  }
+  .tl-body h3{font-size:21px; margin-bottom:8px;}
+  .tl-body p{color:var(--ink-500); font-size:15px; max-width:620px;}
+
+  /* ---------- MANAGEMENT (dark panel) ---------- */
+  .mgmt-panel{
+    background:var(--emerald-950); color:var(--ivory-100); border-radius:var(--radius-lg);
+    overflow:hidden; position:relative;
+  }
+  .mgmt-grid{display:grid; grid-template-columns:1fr 1fr;}
+  .mgmt-text{padding:56px 52px; position:relative; z-index:1;}
+  .mgmt-text h3{color:#fff; font-size:24px; margin-bottom:18px;}
+  .mgmt-list{display:flex; flex-direction:column; gap:14px; margin-bottom:34px;}
+  .mgmt-list li{display:flex; gap:12px; font-size:15px; color:rgba(248,244,234,0.88);}
+  .mgmt-list li .icon-gem{color:var(--gold-300); font-size:13px; margin-top:5px; flex-shrink:0;}
+  .mgmt-img{position:relative;}
+  .mgmt-img img{width:100%; height:100%; object-fit:cover; min-height:420px;}
+  .mgmt-img::after{content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(10,42,32,0.85), transparent 40%);}
+
+  /* ---------- EDGE / WHY ---------- */
+  .edge-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .edge-card{padding:30px 26px; border-radius:var(--radius-md); background:var(--ivory-200); border:1px solid var(--line);}
+  .edge-card .num{font-family:'Fraunces',serif; font-size:14px; color:var(--gold-600); margin-bottom:14px;}
+  .edge-card p{font-size:15px; color:var(--ink-700);}
+
+  /* ---------- TRACK RECORD ---------- */
+  .track{background:var(--emerald-950); color:var(--ivory-100); position:relative; overflow:hidden;}
+  .track .facet-pattern{opacity:0.06;}
+  .track-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:40px; position:relative; z-index:1;}
+  .track-item{text-align:left; border-top:1px solid var(--line-light); padding-top:24px;}
+  .track-item .big{font-family:'Fraunces',serif; font-size:clamp(44px,6vw,64px); color:var(--gold-300); font-weight:500; line-height:1;}
+  .track-item h4{color:#fff; font-size:16px; margin:10px 0 6px; font-family:'Inter',sans-serif; font-weight:600;}
+  .track-item p{font-size:14px; color:rgba(248,244,234,0.7);}
+  .track-foot{margin-top:50px; font-size:15.5px; color:rgba(248,244,234,0.82); max-width:720px; position:relative; z-index:1;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-wrap{position:relative;}
+  .testi-track{display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; scrollbar-width:none;}
+  .testi-track::-webkit-scrollbar{display:none;}
+  .testi-card{
+    scroll-snap-align:start; flex:0 0 min(440px,86vw);
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:34px; display:flex; flex-direction:column; gap:18px; box-shadow:var(--shadow-1);
+  }
+  .testi-stars{color:var(--gold-500); font-size:14px; letter-spacing:3px;}
+  .testi-quote{font-family:'Fraunces',serif; font-size:19px; font-weight:500; color:var(--ink-900); line-height:1.5;}
+  .testi-person{display:flex; align-items:center; gap:12px; margin-top:auto;}
+  .testi-avatar{
+    width:42px; height:42px; border-radius:50%; background:var(--emerald-950); color:var(--gold-300);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:600;
+  }
+  .testi-person strong{display:block; font-size:14.5px;}
+  .testi-person span{font-size:12.5px; color:var(--ink-500);}
+  .testi-nav{display:flex; gap:12px; margin-top:28px;}
+  .testi-nav button{
+    width:42px; height:42px; border-radius:50%; border:1px solid var(--line); background:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--ink-900);
+    transition:background .25s var(--ease), color .25s var(--ease);
+  }
+  .testi-nav button:hover{background:var(--emerald-950); color:var(--gold-300); border-color:var(--emerald-950);}
+  .testi-note{font-size:12.5px; color:var(--ink-500); margin-top:18px; opacity:.8;}
+
+  /* ---------- TRAINING / PARTNERS ---------- */
+  .partners-row{
+    display:flex; flex-wrap:wrap; gap:14px; margin-top:8px;
+  }
+  .partner-badge{
+    border:1px solid var(--line); border-radius:999px; padding:12px 22px;
+    font-size:13.5px; font-weight:600; color:var(--ink-700); background:var(--ivory-200);
+    display:flex; align-items:center; gap:8px;
+  }
+  .partner-badge .icon-gem{font-size:11px; color:var(--gold-600);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--emerald-950); color:var(--ivory-100); position:relative; overflow:hidden;}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:start; position:relative; z-index:1;}
+  .contact h2{color:#fff;}
+  .contact-info{margin-top:28px; display:flex; flex-direction:column; gap:16px;}
+  .contact-info a, .contact-info p{font-size:15.5px; color:rgba(248,244,234,0.88); display:flex; gap:12px; align-items:center;}
+  .contact-info .icon-gem{color:var(--gold-300); font-size:15px;}
+  .contact-info a:hover{color:var(--gold-300);}
+  .form-card{background:rgba(248,244,234,0.06); border:1px solid var(--line-light); border-radius:var(--radius-lg); padding:34px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field{display:flex; flex-direction:column; gap:7px;}
+  .field label{font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--sand-200); opacity:.85;}
+  .field input, .field select, .field textarea{
+    background:rgba(248,244,234,0.07); border:1px solid var(--line-light); border-radius:10px;
+    padding:12px 14px; color:#fff; font-family:'Inter',sans-serif; font-size:14.5px;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:rgba(248,244,234,0.4);}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--gold-500); outline-offset:1px;}
+  .field.full{grid-column:1/-1;}
+  .form-submit{width:100%; justify-content:center; margin-top:6px;}
+  .form-success{display:none; margin-top:14px; font-size:13.5px; color:var(--gold-300);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--emerald-950); border-top:1px solid var(--line-light); padding:30px 0; color:rgba(248,244,234,0.65);}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:13px;}
+  .footer-inner a{color:rgba(248,244,234,0.65);}
+  .footer-inner a:hover{color:var(--gold-300);}
+
+  .back-to-top{position:fixed; right:26px; bottom:26px; z-index:90; width:48px; height:48px; border-radius:50%; background:var(--gold-500); color:var(--emerald-950); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-1); opacity:0; pointer-events:none; transition:opacity .3s var(--ease), transform .3s var(--ease);}
+  .back-to-top.show{opacity:1; pointer-events:auto;}
+  .back-to-top:hover{transform:translateY(-3px);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .promise-grid{grid-template-columns:1fr;}
+    .who-grid{grid-template-columns:repeat(2,1fr);}
+    .edge-grid{grid-template-columns:repeat(2,1fr);}
+    .mgmt-grid{grid-template-columns:1fr;}
+    .mgmt-img{display:none;}
+    .track-grid{grid-template-columns:1fr; gap:28px;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .nav-links{position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px; background:var(--emerald-950); flex-direction:column; align-items:flex-start; padding:100px 30px 30px; gap:26px; transform:translateX(100%); transition:transform .4s var(--ease); box-shadow:-20px 0 60px rgba(0,0,0,0.3);}
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{font-size:16px;}
+    .nav-cta{margin-top:10px;}
+    .burger{display:block;}
+    .section{padding:72px 0;}
+    .wrap{padding:0 22px;}
+    .hero-content{padding:160px 0 40px;}
+    .stat-strip .wrap{justify-content:flex-start; padding:20px 22px;}
+    .who-grid{grid-template-columns:1fr 1fr;}
+    .edge-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .slide-arrow{width:38px; height:38px; font-size:14px;}
+    .slide-caption{left:18px; right:18px; bottom:18px;}
+    .slide-counter{top:14px; right:18px;}
+  }
+  @media (max-width:480px){
+    .who-grid{grid-template-columns:1fr;}
+  }
+
+  :focus-visible{outline:2px solid var(--gold-500); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="gem" viewBox="0 0 32 32">
+    <path d="M16 2 L28 11 L16 30 L4 11 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M16 2 L10 11 L16 30 L22 11 Z M4 11 H28" fill="none" stroke="currentColor" stroke-width="1.1"/>
+  </symbol>
+</svg>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <svg class="icon-gem"><use href="#gem"/></svg>
+      <span class="brand-text"><strong>Emerald</strong><span>4 Hospitality Management Consult</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#serve">Who We Serve</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#track">Track Record</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact" class="nav-cta">Request a Proposal</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=70"
+         onerror="this.onerror=null;this.src='https://picsum.photos/seed/emerald-hero/1800/1100'"
+         alt="Luxury resort property at dusk">
+  </div>
+  <div class="facet-pattern"></div>
+  <div class="hero-content wrap">
+    <div class="eyebrow hero-eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Mombasa, Kenya — Hospitality Consulting &amp; Management</div>
+    <h1 class="reveal">Turning unique hospitality projects into <em>profitable</em> opportunities.</h1>
+    <p class="lead reveal">Strategic consultancy and hands-on management for hotels, resorts and restaurants — pairing fourteen years of local know-how on the Kenyan coast with international hospitality experience.</p>
+    <div class="hero-ctas reveal">
+      <a href="#contact" class="btn btn-primary">Request a Proposal</a>
+      <a href="#services" class="btn btn-ghost">View Our Services</a>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="wrap">
+      <div class="stat-item"><b>14+</b><span>Years in hospitality</span></div>
+      <div class="stat-item"><b>2010</b><span>Operating since</span></div>
+      <div class="stat-item"><b>2016</b><span>Pearl-Management launched</span></div>
+      <div class="stat-item"><b>Mombasa</b><span>Kenya, East Africa</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WHAT WE DO ============ -->
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> What We Do</div>
+      <h2>From concept to profit, we hold the full picture.</h2>
+    </div>
+    <div class="promise-grid">
+      <div class="promise-lead reveal">
+        <p>Our local know-how and international experience combine with a dynamic, result-driven approach to hotel, apartment and restaurant management — significantly improving the profitability of a project for its investors.</p>
+      </div>
+      <div class="promise-card reveal">
+        <svg class="icon-gem"><use href="#gem"/></svg>
+        <h3>Strategic Alignment</h3>
+        <p>Detailed planning and future management strategies, tailored to your project's unique position in the market.</p>
+      </div>
+      <div class="promise-card reveal">
+        <svg class="icon-gem"><use href="#gem"/></svg>
+        <h3>Positioning &amp; Marketing</h3>
+        <p>Well-studied positioning and sales &amp; marketing plans built to maximize returns from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE SERVE ============ -->
+<section class="section" id="serve" style="background:var(--ivory-200);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Who We Serve</div>
+      <h2>Built for every stakeholder around the table.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=700&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/owners/700/950'" alt="Modern hotel exterior">
+        <div class="who-card-content"><svg class="icon-gem"><use href="#gem"/></svg><h3>Hotel Owners &amp; Developers</h3><p>Private investors and development firms seeking expert guidance.</p></div>
+      </div>
+      <div class="who-card reveal">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/funds/700/950'" alt="City skyline representing finance">
+        <div class="who-card-content"><svg class="icon-gem"><use href="#gem"/></svg><h3>Investment Funds</h3><p>Merchant banks and investment funds looking for profitable hospitality ventures.</p></div>
+      </div>
+      <div class="who-card reveal">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=700&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/fnb/700/950'" alt="Fine dining plate">
+        <div class="who-card-content"><svg class="icon-gem"><use href="#gem"/></svg><h3>F&amp;B Investors</h3><p>Investors in food &amp; beverage operations and restaurant concepts.</p></div>
+      </div>
+      <div class="who-card reveal">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/architects/700/950'" alt="Construction and architecture">
+        <div class="who-card-content"><svg class="icon-gem"><use href="#gem"/></svg><h3>Architects &amp; Operators</h3><p>Hotel operators and architects requiring strategic consulting services.</p></div>
+      </div>
+    </div>
+    <p class="who-footnote reveal">For over fourteen years, we've extended our services from market studies and project supervision to concept development and full hotel &amp; restaurant management.</p>
+  </div>
+</section>
+
+<!-- ============ GALLERY / SLIDESHOW ============ -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Gallery</div>
+      <h2>The spaces our projects bring to life.</h2>
+      <p>A look at the kinds of properties, rooms and outlets our consulting and management work shapes — from lobby to plate.</p>
+    </div>
+    <div class="slideshow reveal" id="slideshow">
+      <div class="slideshow-stage" id="slideStage">
+
+        <div class="slide active" data-index="0">
+          <img src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-lobby/1600/1000'" alt="Hotel reception and lobby">
+          <div class="slide-caption"><div class="eyebrow on-dark">Lobbies &amp; Reception</div><h3>First impressions, designed to convert.</h3></div>
+        </div>
+
+        <div class="slide" data-index="1">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-pool/1600/1000'" alt="Resort pool and leisure deck">
+          <div class="slide-caption"><div class="eyebrow on-dark">Pools &amp; Leisure</div><h3>Resort and leisure spaces guests remember.</h3></div>
+        </div>
+
+        <div class="slide" data-index="2">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-restaurant/1600/1000'" alt="Restaurant interior">
+          <div class="slide-caption"><div class="eyebrow on-dark">Restaurants &amp; F&amp;B</div><h3>Profitable concepts, built around the plate.</h3></div>
+        </div>
+
+        <div class="slide" data-index="3">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-room/1600/1000'" alt="Boutique guest room">
+          <div class="slide-caption"><div class="eyebrow on-dark">Guest Rooms &amp; Suites</div><h3>Comfort standards, adapted to the local market.</h3></div>
+        </div>
+
+        <div class="slide" data-index="4">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-spa/1600/1000'" alt="Spa and wellness space">
+          <div class="slide-caption"><div class="eyebrow on-dark">Spa &amp; Wellness</div><h3>New trends in health and wellness travel.</h3></div>
+        </div>
+
+        <div class="slide" data-index="5">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/gallery-build/1600/1000'" alt="Hotel under construction">
+          <div class="slide-caption"><div class="eyebrow on-dark">Project Management</div><h3>Quality control, from groundbreaking to handover.</h3></div>
+        </div>
+
+        <div class="slide-counter" id="slideCounter">01 / 06</div>
+        <button class="slide-arrow prev" id="slidePrev" aria-label="Previous photo">←</button>
+        <button class="slide-arrow next" id="slideNext" aria-label="Next photo">→</button>
+        <div class="slide-progress" id="slideProgress"></div>
+      </div>
+      <div class="slide-dots" id="slideDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONSULTING SERVICES (TIMELINE) ============ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Consulting Services</div>
+      <h2>Six stages. One strategic thread, start to finish.</h2>
+      <p>We collaborate with the UNWTO (World Tourism Organization) to keep every recommendation grounded in current global market trends.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-rail"></div>
+      <div class="tl-item reveal">
+        <div class="tl-num">01</div>
+        <div class="tl-body">
+          <h3>Market &amp; Feasibility Analysis</h3>
+          <p>Competition studies, in-depth feasibility &amp; market research, identification of new trends and needs, and analysis of socio-economic and socio-cultural values to shape concept development and positioning.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">02</div>
+        <div class="tl-body">
+          <h3>Business Plan &amp; Project Development</h3>
+          <p>Financing research and investor introductions, project concept development and adaptation of existing plans, and advice on franchise versus independent management — including F&amp;B concept repositioning.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">03</div>
+        <div class="tl-body">
+          <h3>Pre-Opening Support</h3>
+          <p>Positioning strategy and sales &amp; marketing plans, supplier selection across FF&amp;E, OS&amp;E and IT, staff recruitment &amp; training, and support designing the corporate image and website.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">04</div>
+        <div class="tl-body">
+          <h3>Project Management</h3>
+          <p>Snagging control, full project coordination, quality control through construction, and close coordination with operators, technical teams and equipment suppliers through handover.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">05</div>
+        <div class="tl-body">
+          <h3>Operational Support &amp; Advice</h3>
+          <p>Ongoing quality control, web design consulting, sales &amp; marketing analysis, and revenue &amp; e-commerce management to keep distribution channels performing.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">06</div>
+        <div class="tl-body">
+          <h3>Training</h3>
+          <p>Student placements and internal hotel training, delivered alongside academic partners and our ongoing collaboration with the UNWTO.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANAGEMENT SERVICES ============ -->
+<section class="section" style="background:var(--ivory-200);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Management Services</div>
+      <h2>Hands-on management. Transparent, outcome-linked contracts.</h2>
+    </div>
+    <div class="mgmt-panel reveal">
+      <div class="mgmt-grid">
+        <div class="mgmt-text">
+          <h3>We…</h3>
+          <ul class="mgmt-list">
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Generate high revenues that translate into a better return on investment.</li>
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Prioritize the maximum feasibility of the property before imposing any brand.</li>
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Offer hybrid management contracts linked closely to outcomes, with transparent costs.</li>
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Maximize cost savings through our large project portfolio and extensive contact network.</li>
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Conduct local, individual hands-on management backed by our corporate offices.</li>
+            <li><svg class="icon-gem"><use href="#gem"/></svg> Drive niche hotels and projects — luxury, health, resorts, mixed-use — into the profit zone.</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Talk To Our Team</a>
+        </div>
+        <div class="mgmt-img">
+          <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=900&q=70" onerror="this.onerror=null;this.src='https://picsum.photos/seed/mgmt/900/1100'" alt="Hotel lobby interior">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDGE ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Why Emerald</div>
+      <h2>Creative, dynamic and profitable solutions.</h2>
+    </div>
+    <div class="edge-grid">
+      <div class="edge-card reveal">
+        <div class="num">100%</div>
+        <p>We differentiate ourselves from competitors because our team brings fully practical, hands-on operational experience as managers and strategic consultants across dynamic markets.</p>
+      </div>
+      <div class="edge-card reveal">
+        <div class="num">Long-Term</div>
+        <p>We build successful projects linked to careful planning and a genuinely long-term vision, not quick fixes.</p>
+      </div>
+      <div class="edge-card reveal">
+        <div class="num">Win-Win</div>
+        <p>We understand the win-win opportunities in every market for project leaders, investors and banks alike.</p>
+      </div>
+      <div class="edge-card reveal">
+        <div class="num">Results</div>
+        <p>A highly qualified executive team, multi-market experience and a drive to deliver real results sets us apart.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRACK RECORD ============ -->
+<section class="section track" id="track">
+  <div class="facet-pattern"></div>
+  <div class="wrap">
+    <div class="section-head" style="max-width:680px;">
+      <div class="eyebrow on-dark"><svg class="icon-gem"><use href="#gem"/></svg> Proven Track Record</div>
+      <h2 style="color:#fff;">Fourteen years of hands-on hospitality results.</h2>
+    </div>
+    <div class="track-grid">
+      <div class="track-item reveal">
+        <div class="big">14+</div>
+        <h4>Years of Experience</h4>
+        <p>Serving the hospitality sector since 2010.</p>
+      </div>
+      <div class="track-item reveal">
+        <div class="big">2016</div>
+        <h4>Pearl-Management Platform</h4>
+        <p>Our purpose-built management platform for boutique &amp; niche properties.</p>
+      </div>
+      <div class="track-item reveal">
+        <div class="big">100%</div>
+        <h4>Hands-On</h4>
+        <p>Local management on the ground, backed by corporate support.</p>
+      </div>
+    </div>
+    <p class="track-foot reveal">Successfully operating small and boutique properties since 2010, and driving niche hotels into the profit zone across luxury, health &amp; wellness, resort and mixed-use developments.</p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Testimonials</div>
+      <h2>What partners say about working with us.</h2>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Emerald gave our boutique property a clear positioning strategy and stayed hands-on right through opening week. Occupancy targets were hit within the first quarter."</p>
+          <div class="testi-person">
+            <div class="testi-avatar">B</div>
+            <div><strong>Boutique Hotel Owner</strong><span>South Coast, Kenya</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"What stood out was the transparency of the management contract — every cost was linked to an outcome, which made it easy to trust the numbers."</p>
+          <div class="testi-person">
+            <div class="testi-avatar">R</div>
+            <div><strong>Resort Developer</strong><span>Diani Beach</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Their feasibility study saved us from a costly brand decision early on, and the F&amp;B concept they helped develop is now our strongest revenue line."</p>
+          <div class="testi-person">
+            <div class="testi-avatar">F</div>
+            <div><strong>F&amp;B Investor</strong><span>Nairobi</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Pre-opening was the smoothest launch we've had — staff training, supplier selection and the marketing plan were all in place ahead of schedule."</p>
+          <div class="testi-person">
+            <div class="testi-avatar">M</div>
+            <div><strong>Hotel Operator</strong><span>Mombasa</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-nav">
+        <button id="testiPrev" aria-label="Previous testimonial">←</button>
+        <button id="testiNext" aria-label="Next testimonial">→</button>
+      </div>
+      <p class="testi-note">Sample testimonials shown for illustration — swap in your own client quotes before publishing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAINING & PARTNERS ============ -->
+<section class="section" style="background:var(--ivory-200);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><svg class="icon-gem"><use href="#gem"/></svg> Training &amp; Partnerships</div>
+      <h2>Training students. Strengthening teams from within.</h2>
+      <p>Beyond consulting, we train students and run internal training programs in hotels, alongside leading academic and global partners.</p>
+    </div>
+    <div class="partners-row reveal">
+      <div class="partner-badge"><svg class="icon-gem"><use href="#gem"/></svg> Universidad Europea de Madrid</div>
+      <div class="partner-badge"><svg class="icon-gem"><use href="#gem"/></svg> ESCP Europe</div>
+      <div class="partner-badge"><svg class="icon-gem"><use href="#gem"/></svg> Les Roches</div>
+      <div class="partner-badge"><svg class="icon-gem"><use href="#gem"/></svg> Ciomijas</div>
+      <div class="partner-badge"><svg class="icon-gem"><use href="#gem"/></svg> UNWTO</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="facet-pattern"></div>
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow on-dark"><svg class="icon-gem"><use href="#gem"/></svg> Let's Give Your Project A Clear Path To Profit</div>
+      <h2>Let's create success together.</h2>
+      <p style="color:rgba(248,244,234,0.78); margin-top:18px; max-width:440px;">Contact us to learn about our philosophy and receive a personalized proposal for your hospitality project.</p>
+      <div class="contact-info">
+        <p><svg class="icon-gem"><use href="#gem"/></svg> Mombasa, Kenya</p>
+        <a href="tel:+254725865855"><svg class="icon-gem"><use href="#gem"/></svg> +254 725 865 855</a>
+        <a href="mailto:md@emeraldkenya.com"><svg class="icon-gem"><use href="#gem"/></svg> md@emeraldkenya.com</a>
+        <a href="https://www.emeraldkenya.com" target="_blank" rel="noopener"><svg class="icon-gem"><use href="#gem"/></svg> emeraldkenya.com</a>
+        <a href="https://www.facebook.com/ehospitalitymgt" target="_blank" rel="noopener"><svg class="icon-gem"><use href="#gem"/></svg> facebook.com/ehospitalitymgt</a>
+      </div>
+    </div>
+    <div class="form-card reveal">
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Jane Mwangi" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@company.com" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="project">Project Type</label>
+            <select id="project" name="project">
+              <option>Hotel Development</option>
+              <option>Resort / Mixed-Use</option>
+              <option>Restaurant / F&amp;B Concept</option>
+              <option>Existing Property — Repositioning</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label for="location">Location</label><input id="location" name="location" type="text" placeholder="e.g. Diani, Kenya"></div>
+        </div>
+        <div class="field full" style="margin-bottom:16px;">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us a little about your project..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Request a Proposal</button>
+        <p class="form-success" id="formSuccess">Thanks — your email client should now be open with your message ready to send.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> The Emerald 4 Hospitality Management Dynamics Limited. All rights reserved.</span>
+    <span><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a> · Mombasa, Kenya</span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backTop" aria-label="Back to top"><svg class="icon-gem"><use href="#gem"/></svg></button>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    backTop.classList.toggle('show', window.scrollY > 600);
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Back to top
+  backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('is-visible'); io.unobserve(entry.target); } });
+  }, {threshold:0.12});
+  reveals.forEach(el => io.observe(el));
+
+  // Testimonial scroller
+  const track = document.getElementById('testiTrack');
+  const cardWidth = () => track.querySelector('.testi-card').offsetWidth + 24;
+  document.getElementById('testiNext').addEventListener('click', () => track.scrollBy({left:cardWidth(), behavior:'smooth'}));
+  document.getElementById('testiPrev').addEventListener('click', () => track.scrollBy({left:-cardWidth(), behavior:'smooth'}));
+
+  // Contact form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const project = document.getElementById('project').value;
+    const location = document.getElementById('location').value;
+    const message = document.getElementById('message').value;
+    const subject = encodeURIComponent('Proposal Request — ' + project);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\nEmail: ' + email + '\nProject Type: ' + project + '\nLocation: ' + location + '\n\nMessage:\n' + message
+    );
+    window.location.href = 'mailto:md@emeraldkenya.com?subject=' + subject + '&body=' + body;
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  // Photo slideshow / gallery
+  (function(){
+    const stage = document.getElementById('slideStage');
+    const slides = Array.from(stage.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('slideDots');
+    const counter = document.getElementById('slideCounter');
+    const progress = document.getElementById('slideProgress');
+    const total = slides.length;
+    let current = 0;
+    let timer = null;
+    const DURATION = 5200;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('.slide-dot'));
+
+    function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+    function render(){
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = pad(current + 1) + ' / ' + pad(total);
+    }
+
+    function goTo(i){
+      current = (i + total) % total;
+      render();
+      restart();
+    }
+    function next(){ goTo(current + 1); }
+    function prev(){ goTo(current - 1); }
+
+    function restart(){
+      if (reduceMotion) return;
+      clearInterval(timer);
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      requestAnimationFrame(() => {
+        progress.style.transition = 'width ' + DURATION + 'ms linear';
+        progress.style.width = '100%';
+      });
+      timer = setInterval(next, DURATION);
+    }
+
+    document.getElementById('slideNext').addEventListener('click', next);
+    document.getElementById('slidePrev').addEventListener('click', prev);
+
+    stage.addEventListener('mouseenter', () => clearInterval(timer));
+    stage.addEventListener('mouseleave', restart);
+
+    // Touch swipe
+    let touchStartX = null;
+    stage.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; clearInterval(timer); }, {passive:true});
+    stage.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); } else { restart(); }
+      touchStartX = null;
+    }, {passive:true});
+
+    // Keyboard arrows when slideshow is in view
+    document.addEventListener('keydown', (e) => {
+      const rect = stage.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    render();
+    restart();
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
