@@ -1,1 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Emerald 4 Hospitality Management Consult</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --g1:#0e4d2e;--g2:#176639;--g3:#22a05a;--g4:#c8f0d8;
+      --sand:#f5f0e8;--warm:#fffdf9;
+      --ink:#1a2420;--mid:#4a5e58;--muted:#8fa39b;
+      --gold:#c8a428;--gold-light:#f0d87a;
+      --white:#ffffff;
+      --r:6px;
+    }
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--warm);overflow-x:hidden}
 
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#f0f0f0}
+    ::-webkit-scrollbar-thumb{background:var(--g2);border-radius:3px}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 5vw;height:72px;
+      transition:background .35s,box-shadow .35s;
+    }
+    nav.scrolled{background:rgba(14,77,46,.97);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-gem{
+      width:30px;height:30px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--g3),var(--g1));
+      clip-path:polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%);
+    }
+    .nav-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;
+      color:#fff;letter-spacing:.02em;line-height:1.1}
+    .nav-name small{font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:300;
+      letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);display:block}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.8);font-size:.82rem;letter-spacing:.06em;
+      text-transform:uppercase;text-decoration:none;font-weight:500;
+      padding-bottom:3px;border-bottom:1px solid transparent;transition:all .2s}
+    .nav-links a:hover{color:#fff;border-bottom-color:var(--g3)}
+    .nav-btn{
+      padding:9px 22px;background:var(--g3);color:#fff;border:none;border-radius:var(--r);
+      font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+      text-decoration:none;cursor:pointer;transition:background .2s,transform .15s
+    }
+    .nav-btn:hover{background:var(--g2);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+
+    /* ── HERO SLIDESHOW ── */
+    #hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
+    .slides{position:absolute;inset:0}
+    .slide{
+      position:absolute;inset:0;opacity:0;
+      background-size:cover;background-position:center;
+      transition:opacity 1.2s ease-in-out
+    }
+    .slide.active{opacity:1}
+    .slide::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(10,40,25,.75) 0%,rgba(10,40,25,.4) 60%,transparent 100%)
+    }
+    .hero-content{
+      position:relative;z-index:2;
+      height:100%;display:flex;flex-direction:column;
+      justify-content:center;padding:0 8vw;max-width:760px
+    }
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(34,160,90,.18);border:1px solid rgba(34,160,90,.4);
+      color:var(--g4);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+      font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:28px;width:fit-content
+    }
+    .hero-badge::before{content:'◆';color:var(--g3);font-size:.55rem}
+    .hero-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.8rem,6vw,5rem);font-weight:700;
+      color:#fff;line-height:1.08;margin-bottom:24px
+    }
+    .hero-title em{font-style:italic;color:var(--g4)}
+    .hero-sub{
+      font-size:1.05rem;line-height:1.75;color:rgba(255,255,255,.7);
+      max-width:500px;margin-bottom:40px
+    }
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-hero{
+      padding:14px 32px;background:var(--g3);color:#fff;
+      border:none;border-radius:var(--r);
+      font-size:.88rem;font-weight:600;letter-spacing:.06em;
+      text-decoration:none;cursor:pointer;transition:all .2s
+    }
+    .btn-hero:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .btn-hero-ghost{
+      padding:14px 32px;background:transparent;color:#fff;
+      border:1.5px solid rgba(255,255,255,.45);border-radius:var(--r);
+      font-size:.88rem;font-weight:500;text-decoration:none;
+      transition:all .2s
+    }
+    .btn-hero-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+    /* slide nav dots */
+    .slide-dots{
+      position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+      z-index:3;display:flex;gap:10px
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:rgba(255,255,255,.35);cursor:pointer;border:none;
+      transition:background .3s,transform .3s
+    }
+    .dot.active{background:var(--g3);transform:scale(1.3)}
+    /* slide arrows */
+    .slide-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+      width:48px;height:48px;border-radius:50%;
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+      color:#fff;font-size:1.2rem;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .2s,transform .2s
+    }
+    .slide-arrow:hover{background:rgba(255,255,255,.22);transform:translateY(-50%) scale(1.05)}
+    .slide-arrow.prev{left:24px}
+    .slide-arrow.next{right:24px}
+    /* stats strip */
+    .hero-stats{
+      position:absolute;bottom:0;left:0;right:0;z-index:3;
+      display:grid;grid-template-columns:repeat(4,1fr);
+      background:rgba(14,77,46,.92);backdrop-filter:blur(8px)
+    }
+    .hero-stat{
+      padding:22px 24px;text-align:center;
+      border-right:1px solid rgba(255,255,255,.1)
+    }
+    .hero-stat:last-child{border-right:none}
+    .hero-stat-n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;font-weight:700;color:#fff;line-height:1
+    }
+    .hero-stat-n span{color:var(--g3)}
+    .hero-stat-l{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.5);margin-top:5px}
+
+    /* ── SHARED SECTION STYLES ── */
+    .sec{padding:90px 8vw}
+    .sec-eyebrow{
+      font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+      color:var(--g2);margin-bottom:12px;
+      display:flex;align-items:center;gap:10px
+    }
+    .sec-eyebrow::after{content:'';flex:0 0 28px;height:1px;background:var(--g2)}
+    .sec-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;
+      color:var(--ink);line-height:1.18;margin-bottom:16px
+    }
+    .sec-title.w{color:#fff}
+    .sec-desc{font-size:.97rem;line-height:1.75;color:var(--mid);max-width:560px}
+    .sec-desc.w{color:rgba(255,255,255,.65)}
+
+    /* ── INTRO / WHAT ── */
+    #intro{background:var(--warm)}
+    .intro-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:48px
+    }
+    .intro-img-wrap{position:relative;border-radius:12px;overflow:hidden;height:480px}
+    .intro-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+    .intro-img-wrap:hover img{transform:scale(1.03)}
+    .intro-img-badge{
+      position:absolute;bottom:24px;left:24px;
+      background:rgba(14,77,46,.92);color:#fff;
+      padding:16px 22px;border-radius:10px;backdrop-filter:blur(4px)
+    }
+    .intro-img-badge b{display:block;font-family:'Cormorant Garamond',serif;
+      font-size:1.6rem;font-weight:700;color:var(--g4)}
+    .intro-img-badge span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+      color:rgba(255,255,255,.6)}
+    .intro-points{margin-top:28px;display:flex;flex-direction:column;gap:16px}
+    .intro-point{
+      display:flex;gap:14px;align-items:flex-start;
+      padding:18px 20px;border-radius:8px;background:var(--sand);
+      border-left:3px solid var(--g3);transition:transform .2s,box-shadow .2s
+    }
+    .intro-point:hover{transform:translateX(4px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .intro-point-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+    .intro-point h4{font-size:.93rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+    .intro-point p{font-size:.83rem;color:var(--mid);line-height:1.55}
+
+    /* ── WHO WE SERVE ── */
+    #who{background:var(--g1)}
+    .who-grid{
+      margin-top:52px;display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px
+    }
+    .who-card{
+      background:rgba(255,255,255,.05);padding:36px 28px;
+      border:1px solid rgba(255,255,255,.07);
+      transition:background .25s,transform .2s;cursor:default
+    }
+    .who-card:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+    .who-card-icon{
+      width:52px;height:52px;border-radius:10px;
+      background:rgba(34,160,90,.2);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.4rem;margin-bottom:20px
+    }
+    .who-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;
+      font-weight:700;color:#fff;margin-bottom:10px}
+    .who-card p{font-size:.84rem;color:rgba(255,255,255,.55);line-height:1.6}
+
+    /* ── PHOTO GALLERY SLIDESHOW ── */
+    #gallery{background:var(--ink);padding:80px 0;overflow:hidden}
+    .gallery-header{padding:0 8vw;margin-bottom:40px}
+    .gallery-track-wrap{overflow:hidden;position:relative}
+    .gallery-track{
+      display:flex;gap:16px;
+      animation:scrollGallery 38s linear infinite;
+      width:max-content
+    }
+    .gallery-track:hover{animation-play-state:paused}
+    @keyframes scrollGallery{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+    .gallery-img{
+      width:320px;height:220px;flex-shrink:0;border-radius:10px;overflow:hidden;position:relative
+    }
+    .gallery-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .gallery-img:hover img{transform:scale(1.06)}
+    .gallery-img-label{
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(transparent,rgba(0,0,0,.65));
+      padding:20px 14px 10px;
+      font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+      color:rgba(255,255,255,.8)
+    }
+
+    /* ── SERVICES ── */
+    #services{background:var(--sand)}
+    .services-tabs{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .stab{
+      padding:8px 18px;border-radius:20px;border:1.5px solid #ccc;
+      font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+      cursor:pointer;background:transparent;color:var(--mid);transition:all .2s
+    }
+    .stab.active,.stab:hover{background:var(--g2);border-color:var(--g2);color:#fff}
+    .services-panels{margin-top:36px}
+    .spanel{display:none}
+    .spanel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .scard{
+      background:#fff;border-radius:12px;overflow:hidden;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);transition:box-shadow .2s,transform .2s
+    }
+    .scard:hover{box-shadow:0 8px 32px rgba(0,0,0,.12);transform:translateY(-4px)}
+    .scard-img{height:160px;overflow:hidden}
+    .scard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .scard:hover .scard-img img{transform:scale(1.06)}
+    .scard-body{padding:22px}
+    .scard-body h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;
+      font-weight:700;color:var(--ink);margin-bottom:8px}
+    .scard-body p{font-size:.83rem;color:var(--mid);line-height:1.6}
+    .scard-tags{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+    .tag{
+      font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+      background:var(--g4);color:var(--g1);padding:3px 10px;border-radius:20px;font-weight:600
+    }
+
+    /* ── MANAGEMENT SPLIT ── */
+    #management{background:#fff;padding:0}
+    .mgmt-split{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+    .mgmt-img{position:relative;overflow:hidden}
+    .mgmt-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}
+    .mgmt-img:hover img{transform:scale(1.04)}
+    .mgmt-img-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(10,40,25,.7),rgba(10,40,25,.2))
+    }
+    .mgmt-img-text{
+      position:absolute;bottom:32px;left:32px;right:32px;
+      font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;
+      color:#fff;line-height:1.25
+    }
+    .mgmt-img-text em{color:var(--g4);font-style:italic}
+    .mgmt-content{
+      padding:64px 56px;display:flex;flex-direction:column;justify-content:center;
+      background:var(--g1)
+    }
+    .mgmt-list{margin-top:32px;display:flex;flex-direction:column;gap:0}
+    .mgmt-item{
+      display:flex;gap:16px;padding:18px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      transition:padding-left .2s
+    }
+    .mgmt-item:hover{padding-left:6px}
+    .mgmt-item:last-child{border-bottom:none}
+    .mgmt-bullet{
+      width:32px;height:32px;border-radius:50%;flex-shrink:0;
+      background:rgba(34,160,90,.2);display:flex;align-items:center;
+      justify-content:center;font-size:.9rem;margin-top:1px
+    }
+    .mgmt-item h4{font-size:.93rem;font-weight:600;color:#fff;margin-bottom:4px}
+    .mgmt-item p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.55}
+
+    /* ── TRACK RECORD ── */
+    #track{background:var(--sand)}
+    .track-feature{
+      margin-top:52px;display:grid;
+      grid-template-columns:1.2fr 1fr;gap:48px;align-items:start
+    }
+    .track-img-stack{position:relative;height:440px}
+    .track-img-main{
+      position:absolute;top:0;left:0;width:78%;height:85%;
+      border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.14)
+    }
+    .track-img-main img{width:100%;height:100%;object-fit:cover}
+    .track-img-accent{
+      position:absolute;bottom:0;right:0;width:50%;height:55%;
+      border-radius:12px;overflow:hidden;
+      box-shadow:0 8px 32px rgba(0,0,0,.18);
+      border:4px solid #fff
+    }
+    .track-img-accent img{width:100%;height:100%;object-fit:cover}
+    .track-badge{
+      position:absolute;top:20px;right:20px;
+      background:var(--g1);color:#fff;
+      padding:12px 16px;border-radius:8px;text-align:center;
+      box-shadow:0 4px 16px rgba(0,0,0,.2)
+    }
+    .track-badge b{display:block;font-family:'Cormorant Garamond',serif;
+      font-size:2rem;font-weight:700;color:var(--g4);line-height:1}
+    .track-badge span{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+      color:rgba(255,255,255,.6)}
+    .track-numbers{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0}
+    .track-n{
+      background:#fff;border-radius:10px;padding:24px 20px;
+      border-bottom:3px solid var(--g3);
+      box-shadow:0 2px 12px rgba(0,0,0,.05)
+    }
+    .track-n-num{
+      font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;
+      color:var(--g1);line-height:1
+    }
+    .track-n-num span{color:var(--g3)}
+    .track-n-label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--muted);margin-top:6px}
+    .track-n-desc{font-size:.8rem;color:var(--mid);margin-top:6px;line-height:1.5}
+    .track-quote{
+      margin-top:24px;padding:24px;background:var(--g1);border-radius:10px;
+      font-family:'Cormorant Garamond',serif;font-size:1.1rem;
+      font-style:italic;color:rgba(255,255,255,.8);line-height:1.6
+    }
+    .track-quote::before{content:'"';font-size:2.5rem;color:var(--g3);
+      line-height:.6;display:block;margin-bottom:8px}
+
+    /* ── TESTIMONIALS / PARTNERS ── */
+    #partners{background:var(--ink);padding:60px 8vw}
+    .partners-logos{
+      margin-top:36px;display:flex;align-items:center;
+      justify-content:center;gap:48px;flex-wrap:wrap
+    }
+    .partner-item{text-align:center;color:rgba(255,255,255,.35);
+      font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+      transition:color .2s}
+    .partner-item:hover{color:rgba(255,255,255,.7)}
+    .partner-icon{font-size:1.8rem;display:block;margin-bottom:8px}
+
+    /* ── CONTACT ── */
+    #contact{background:linear-gradient(135deg,var(--g1) 0%,#0a2818 100%);padding:90px 8vw}
+    .contact-wrap{
+      display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start
+    }
+    .contact-form-wrap{
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;padding:40px;backdrop-filter:blur(4px)
+    }
+    .contact-form-wrap h3{
+      font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+      font-weight:700;color:#fff;margin-bottom:24px
+    }
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{margin-bottom:16px}
+    .form-group label{
+      display:block;font-size:.75rem;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select{
+      width:100%;padding:12px 16px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+      border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;
+      outline:none;transition:border-color .2s,background .2s
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder{color:rgba(255,255,255,.3)}
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus{
+      border-color:var(--g3);background:rgba(255,255,255,.09)
+    }
+    .form-group select option{background:#1a3a28;color:#fff}
+    .form-group textarea{resize:vertical;min-height:110px}
+    .btn-submit{
+      width:100%;padding:14px;background:var(--g3);color:#fff;
+      border:none;border-radius:8px;font-size:.9rem;font-weight:600;
+      letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+      transition:background .2s,transform .15s
+    }
+    .btn-submit:hover{background:var(--g2);transform:translateY(-1px)}
+    .contact-info{padding-top:16px}
+    .contact-info-block{margin-bottom:32px}
+    .contact-info-block h4{
+      font-family:'Cormorant Garamond',serif;font-size:1.8rem;
+      font-weight:700;color:#fff;margin-bottom:12px
+    }
+    .contact-info-block p{font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.7}
+    .contact-details-list{margin-top:32px;display:flex;flex-direction:column;gap:20px}
+    .cdetail{display:flex;gap:14px;align-items:flex-start}
+    .cdetail-icon{
+      width:40px;height:40px;border-radius:8px;
+      background:rgba(34,160,90,.2);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;font-size:1rem
+    }
+    .cdetail-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--g3);margin-bottom:3px}
+    .cdetail-val a,.cdetail-val span{
+      font-size:.9rem;color:rgba(255,255,255,.8);text-decoration:none
+    }
+    .cdetail-val a:hover{color:var(--g4)}
+    .social-links{margin-top:28px;display:flex;gap:12px}
+    .social-btn{
+      padding:9px 18px;border:1px solid rgba(255,255,255,.2);border-radius:6px;
+      color:rgba(255,255,255,.65);font-size:.78rem;letter-spacing:.06em;
+      text-transform:uppercase;text-decoration:none;transition:all .2s
+    }
+    .social-btn:hover{border-color:var(--g3);color:var(--g3)}
+
+    /* ── FOOTER ── */
+    footer{
+      background:#050e0a;padding:32px 8vw;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px
+    }
+    .footer-brand{font-family:'Cormorant Garamond',serif;font-size:1rem;
+      font-weight:600;color:rgba(255,255,255,.4)}
+    .footer-brand span{color:var(--g3)}
+    .footer-copy{font-size:.75rem;color:rgba(255,255,255,.25)}
+    .footer-links{display:flex;gap:20px}
+    .footer-links a{font-size:.75rem;color:rgba(255,255,255,.3);text-decoration:none;transition:.2s}
+    .footer-links a:hover{color:var(--g3)}
+
+    /* ── MOBILE NAV ── */
+    @media(max-width:900px){
+      .nav-links{display:none}.hamburger{display:flex}
+      .nav-links.open{
+        display:flex;flex-direction:column;position:fixed;
+        top:72px;left:0;right:0;background:rgba(14,77,46,.98);
+        padding:24px 5vw;gap:20px;box-shadow:0 8px 32px rgba(0,0,0,.3)
+      }
+      .intro-grid{grid-template-columns:1fr}
+      .intro-img-wrap{height:300px}
+      .mgmt-split{grid-template-columns:1fr}
+      .mgmt-content{padding:40px 32px}
+      .track-feature{grid-template-columns:1fr}
+      .track-img-stack{height:280px}
+      .contact-wrap{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:repeat(2,1fr)}
+      .form-row{grid-template-columns:1fr}
+      .slide-arrow{display:none}
+    }
+    @media(max-width:600px){
+      .sec{padding:64px 5vw}
+      .hero-stats{grid-template-columns:repeat(2,1fr)}
+      .hero-stat{padding:16px}
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a class="nav-brand" href="#">
+    <div class="nav-gem"></div>
+    <div class="nav-name">The Emerald <small>4 Hospitality Management Consult</small></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#intro">About</a></li>
+    <li><a href="#who">Who We Serve</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#management">Management</a></li>
+    <li><a href="#track">Results</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-btn" href="#contact">Get a Proposal</a>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO SLIDESHOW ── -->
+<section id="hero">
+  <div class="slides" id="slideshow">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80')"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Mombasa, Kenya · Since 2010</div>
+    <h1 class="hero-title">
+      Turning Unique<br>Projects Into<br><em>Lasting Profit.</em>
+    </h1>
+    <p class="hero-sub">Strategic consultancy and hands-on management for hotels, resorts, and restaurants — combining local expertise with international standards.</p>
+    <div class="hero-actions">
+      <a class="btn-hero" href="#contact">Request a Proposal</a>
+      <a class="btn-hero-ghost" href="#services">Explore Services</a>
+    </div>
+  </div>
+
+  <button class="slide-arrow prev" onclick="moveSlide(-1)">&#8592;</button>
+  <button class="slide-arrow next" onclick="moveSlide(1)">&#8594;</button>
+
+  <div class="slide-dots" id="dots"></div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">14<span>+</span></div>
+      <div class="hero-stat-l">Years Active</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">100<span>%</span></div>
+      <div class="hero-stat-l">Practical Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">2010</div>
+      <div class="hero-stat-l">Founded</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">Pearl<span>™</span></div>
+      <div class="hero-stat-l">Management Platform</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT / INTRO ── -->
+<section id="intro" class="sec">
+  <div class="sec-eyebrow">What We Do</div>
+  <div class="intro-grid">
+    <div class="intro-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?w=900&q=80" alt="Luxury hotel lobby" loading="lazy"/>
+      <div class="intro-img-badge">
+        <b>14+</b>
+        <span>Years of Excellence</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <h2 class="sec-title">We Know How to Turn Unique Projects Into Profit Opportunities</h2>
+      <p class="sec-desc" style="margin-top:16px">Our local know-how and international experience combined with dynamic, result-driven management can significantly improve the profitability of any hospitality project.</p>
+      <div class="intro-points">
+        <div class="intro-point">
+          <div class="intro-point-icon">🎯</div>
+          <div>
+            <h4>Strategic Alignment</h4>
+            <p>Detailed project planning and future management strategies tailored precisely to your vision and market.</p>
+          </div>
+        </div>
+        <div class="intro-point">
+          <div class="intro-point-icon">📊</div>
+          <div>
+            <h4>Positioning & Marketing</h4>
+            <p>Well-studied positioning plans backed by in-depth market analysis and real operational knowledge.</p>
+          </div>
+        </div>
+        <div class="intro-point">
+          <div class="intro-point-icon">💰</div>
+          <div>
+            <h4>Investor Returns</h4>
+            <p>We prioritise maximum property feasibility before imposing any brand — your ROI always comes first.</p>
+          </div>
+        </div>
+        <div class="intro-point">
+          <div class="intro-point-icon">🌍</div>
+          <div>
+            <h4>UNWTO Partnership</h4>
+            <p>We collaborate with the World Tourism Organization to stay ahead of global market trends and insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO WE SERVE ── -->
+<section id="who" class="sec">
+  <div class="sec-eyebrow" style="color:var(--g4)"><span style="width:28px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px;"></span>Who We Serve</div>
+  <h2 class="sec-title w">Partners Across the Hospitality Ecosystem</h2>
+  <p class="sec-desc w">For over fourteen years we have grown our services from market studies and project supervision to concept development and full hotel & restaurant management.</p>
+  <div class="who-grid">
+    <div class="who-card reveal">
+      <div class="who-card-icon">🏨</div>
+      <h3>Hotel Owners & Developers</h3>
+      <p>Private investors and development firms seeking expert guidance to unlock the full potential of their properties.</p>
+    </div>
+    <div class="who-card reveal">
+      <div class="who-card-icon">🏦</div>
+      <h3>Investment Funds & Banks</h3>
+      <p>Merchant banks and investment funds looking for profitable, well-managed hospitality ventures across Africa.</p>
+    </div>
+    <div class="who-card reveal">
+      <div class="who-card-icon">🍽️</div>
+      <h3>F&B Investors</h3>
+      <p>Investors in food and beverage operations and restaurant concepts who need market-tested strategic advice.</p>
+    </div>
+    <div class="who-card reveal">
+      <div class="who-card-icon">🏗️</div>
+      <h3>Architects & Operators</h3>
+      <p>Hotel operators and architects requiring integrated strategic consulting and operational support throughout a project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY AUTO-SCROLL ── -->
+<section id="gallery">
+  <div class="gallery-header">
+    <div class="sec-eyebrow" style="color:var(--g4)"><span style="width:28px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px"></span>Our World</div>
+    <h2 class="sec-title w">Hotels, Restaurants & Resorts</h2>
+  </div>
+  <div class="gallery-track-wrap">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=640&q=80" alt="Resort pool" loading="lazy"/><div class="gallery-img-label">Luxury Resorts</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=640&q=80" alt="Restaurant" loading="lazy"/><div class="gallery-img-label">Fine Dining</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1615460549969-36fa19521a4f?w=640&q=80" alt="Hotel room" loading="lazy"/><div class="gallery-img-label">Boutique Hotels</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=640&q=80" alt="Hotel bar" loading="lazy"/><div class="gallery-img-label">Bar & Lounge</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=640&q=80" alt="Beach resort" loading="lazy"/><div class="gallery-img-label">Beach Properties</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=640&q=80" alt="Spa" loading="lazy"/><div class="gallery-img-label">Spa & Wellness</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=640&q=80" alt="Hotel lobby" loading="lazy"/><div class="gallery-img-label">Hotel Lobbies</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=640&q=80" alt="Rooftop dining" loading="lazy"/><div class="gallery-img-label">Rooftop Concepts</div></div>
+      <!-- duplicate for seamless loop -->
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=640&q=80" alt="Resort pool" loading="lazy"/><div class="gallery-img-label">Luxury Resorts</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=640&q=80" alt="Restaurant" loading="lazy"/><div class="gallery-img-label">Fine Dining</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1615460549969-36fa19521a4f?w=640&q=80" alt="Hotel room" loading="lazy"/><div class="gallery-img-label">Boutique Hotels</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=640&q=80" alt="Hotel bar" loading="lazy"/><div class="gallery-img-label">Bar & Lounge</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=640&q=80" alt="Beach resort" loading="lazy"/><div class="gallery-img-label">Beach Properties</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=640&q=80" alt="Spa" loading="lazy"/><div class="gallery-img-label">Spa & Wellness</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=640&q=80" alt="Hotel lobby" loading="lazy"/><div class="gallery-img-label">Hotel Lobbies</div></div>
+      <div class="gallery-img"><img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=640&q=80" alt="Rooftop dining" loading="lazy"/><div class="gallery-img-label">Rooftop Concepts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services" class="sec">
+  <div class="sec-eyebrow">Our Services</div>
+  <h2 class="sec-title">End-to-End Hospitality Solutions</h2>
+  <p class="sec-desc">From feasibility studies to full operations — creative, dynamic, and profitable solutions for every stage of your project.</p>
+
+  <div class="services-tabs">
+    <button class="stab active" onclick="switchTab('consulting',this)">Consulting</button>
+    <button class="stab" onclick="switchTab('preopening',this)">Pre-Opening</button>
+    <button class="stab" onclick="switchTab('operations',this)">Operations</button>
+    <button class="stab" onclick="switchTab('training',this)">Training</button>
+  </div>
+
+  <div class="services-panels">
+    <div class="spanel active" id="tab-consulting">
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=640&q=80" alt="Market analysis" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Market Analysis</h4>
+          <p>Competition studies, in-depth feasibility analysis, trend identification, and socio-economic research to position your project for success.</p>
+          <div class="scard-tags"><span class="tag">Feasibility</span><span class="tag">Competition</span><span class="tag">Trends</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=640&q=80" alt="Business planning" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Business Plan & Development</h4>
+          <p>Financing research, project concept development, franchise & brand selection advisory, and F&B concept repositioning for maximum ROI.</p>
+          <div class="scard-tags"><span class="tag">Financing</span><span class="tag">Branding</span><span class="tag">F&B</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&q=80" alt="Strategy" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Concept Development</h4>
+          <p>Positioning strategy, concept creation, and adaptation of the existing hotel project to current market demands and guest expectations.</p>
+          <div class="scard-tags"><span class="tag">Positioning</span><span class="tag">Concept</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="tab-preopening">
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=640&q=80" alt="Pre-opening" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Pre-Opening Strategy</h4>
+          <p>Complete positioning strategy and Sales & Marketing Plan crafted before doors open to ensure strong market entry.</p>
+          <div class="scard-tags"><span class="tag">Marketing</span><span class="tag">Sales</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&q=80" alt="Staff training" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Staff Selection & Training</h4>
+          <p>Selection and training of highly qualified staff across all departments, ensuring service standards that match your brand promise.</p>
+          <div class="scard-tags"><span class="tag">HR</span><span class="tag">Training</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=640&q=80" alt="Supplier" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Supplier & Equipment</h4>
+          <p>Support with the selection of suppliers across all areas — FF&E, OSE, IT systems — plus corporate image and website design.</p>
+          <div class="scard-tags"><span class="tag">FF&E</span><span class="tag">IT</span><span class="tag">Branding</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="tab-operations">
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=640&q=80" alt="Operations" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Revenue & E-Commerce</h4>
+          <p>Driving revenue through strategic revenue management, e-commerce optimization, and maximization of distribution channels.</p>
+          <div class="scard-tags"><span class="tag">Revenue</span><span class="tag">OTA</span><span class="tag">Digital</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=640&q=80" alt="Project management" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Project Management</h4>
+          <p>Snagging control, quality control during construction, coordination with operators and technical teams through full handover.</p>
+          <div class="scard-tags"><span class="tag">QC</span><span class="tag">Snagging</span><span class="tag">Handover</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1592229505726-ca121723b8ef?w=640&q=80" alt="Quality" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Quality & Repositioning</h4>
+          <p>Comprehensive quality control, advising on redesign of point-of-sale outlets, and full re-branding and repositioning programs.</p>
+          <div class="scard-tags"><span class="tag">Quality</span><span class="tag">Rebrand</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="tab-training">
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=640&q=80" alt="Education" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Student Training Programs</h4>
+          <p>Structured hospitality training for students in partnership with leading institutions including ESCP Europe and Les Roches.</p>
+          <div class="scard-tags"><span class="tag">ESCP</span><span class="tag">Les Roches</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=640&q=80" alt="Internal training" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>Internal Hotel Training</h4>
+          <p>Bespoke in-house training programs designed to lift service quality and operational performance across all departments.</p>
+          <div class="scard-tags"><span class="tag">In-house</span><span class="tag">Standards</span></div>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="scard-img"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=640&q=80" alt="Partnership" loading="lazy"/></div>
+        <div class="scard-body">
+          <h4>UNWTO Partnership</h4>
+          <p>We collaborate with the World Tourism Organization for global market trend insights applicable to African hospitality markets.</p>
+          <div class="scard-tags"><span class="tag">UNWTO</span><span class="tag">Global</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MANAGEMENT ── -->
+<section id="management">
+  <div class="mgmt-split">
+    <div class="mgmt-img">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80" alt="Luxury hotel management" loading="lazy"/>
+      <div class="mgmt-img-overlay"></div>
+      <div class="mgmt-img-text">Management<br>that <em>delivers results.</em></div>
+    </div>
+    <div class="mgmt-content">
+      <div class="sec-eyebrow" style="color:var(--g4)"><span style="width:24px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px"></span>Management Services</div>
+      <h2 class="sec-title w" style="font-size:1.9rem">Hands-On Management That Moves the Needle</h2>
+      <div class="mgmt-list">
+        <div class="mgmt-item reveal">
+          <div class="mgmt-bullet">💹</div>
+          <div>
+            <h4>Financial Analysis & Strategy</h4>
+            <p>Development of the operational matrix and deep financial situation analysis to identify every improvement opportunity.</p>
+          </div>
+        </div>
+        <div class="mgmt-item reveal">
+          <div class="mgmt-bullet">⚙️</div>
+          <div>
+            <h4>Daily Operational Management</h4>
+            <p>Hands-on daily management adapting international standards to the local market, maximizing all distribution channels.</p>
+          </div>
+        </div>
+        <div class="mgmt-item reveal">
+          <div class="mgmt-bullet">🔄</div>
+          <div>
+            <h4>Repositioning & Re-Branding</h4>
+            <p>Strategic repositioning, emergency management, and development of profitable F&B concepts aligned with market demand.</p>
+          </div>
+        </div>
+        <div class="mgmt-item reveal">
+          <div class="mgmt-bullet">💎</div>
+          <div>
+            <h4>Boutique & Niche Expertise</h4>
+            <p>Successfully driving luxury, health, resort, and mixed-use niche properties into sustained profitability since 2010.</p>
+          </div>
+        </div>
+        <div class="mgmt-item reveal">
+          <div class="mgmt-bullet">🤝</div>
+          <div>
+            <h4>Hybrid Management Contracts</h4>
+            <p>Outcome-linked contracts with transparent costs — we succeed only when your project succeeds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRACK RECORD ── -->
+<section id="track" class="sec">
+  <div class="sec-eyebrow">Proven Results</div>
+  <h2 class="sec-title">A Track Record Built on Real Projects</h2>
+  <div class="track-feature">
+    <div class="track-img-stack reveal">
+      <div class="track-img-main">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Hotel exterior" loading="lazy"/>
+      </div>
+      <div class="track-img-accent">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Restaurant interior" loading="lazy"/>
+      </div>
+      <div class="track-badge">
+        <b>2010</b>
+        <span>Year Founded</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="track-numbers">
+        <div class="track-n">
+          <div class="track-n-num">14<span>+</span></div>
+          <div class="track-n-label">Years Active</div>
+          <div class="track-n-desc">Continuously serving the hospitality sector</div>
+        </div>
+        <div class="track-n">
+          <div class="track-n-num">100<span>%</span></div>
+          <div class="track-n-label">Practical Team</div>
+          <div class="track-n-desc">Every team member has operational experience</div>
+        </div>
+        <div class="track-n">
+          <div class="track-n-num">2<span>x</span></div>
+          <div class="track-n-label">Platforms</div>
+          <div class="track-n-desc">Including Pearl-Management launched 2016</div>
+        </div>
+        <div class="track-n">
+          <div class="track-n-num">∞</div>
+          <div class="track-n-label">Network</div>
+          <div class="track-n-desc">Extensive contacts to maximise cost savings</div>
+        </div>
+      </div>
+      <div class="track-quote">
+        We create successful projects linked with disciplined planning and a long-term vision — turning unique properties into profitable, well-loved destinations.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTNERS ── -->
+<section id="partners">
+  <div style="text-align:center;margin-bottom:8px">
+    <div class="sec-eyebrow" style="color:var(--g4);justify-content:center"><span style="width:24px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px"></span>Education & Industry Partners</div>
+  </div>
+  <div class="partners-logos">
+    <div class="partner-item"><span class="partner-icon">🌐</span>UNWTO</div>
+    <div class="partner-item"><span class="partner-icon">🎓</span>ESCP Europe</div>
+    <div class="partner-item"><span class="partner-icon">🎓</span>Les Roches</div>
+    <div class="partner-item"><span class="partner-icon">🎓</span>Universidad Europea de Madrid</div>
+    <div class="partner-item"><span class="partner-icon">🎓</span>CIOMIJAS</div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="reveal">
+      <div class="contact-info-block">
+        <div class="sec-eyebrow" style="color:var(--g4)"><span style="width:24px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px"></span>Let's Talk</div>
+        <h2 class="sec-title w">Let Us Give<br>You Solutions.</h2>
+        <p class="sec-desc w" style="margin-top:16px">Contact us to get to know our philosophy and request a personalised proposal for your hospitality project.</p>
+      </div>
+      <div class="contact-details-list">
+        <div class="cdetail">
+          <div class="cdetail-icon">📍</div>
+          <div>
+            <div class="cdetail-label">Location</div>
+            <div class="cdetail-val"><span>Mombasa, Kenya</span></div>
+          </div>
+        </div>
+        <div class="cdetail">
+          <div class="cdetail-icon">📞</div>
+          <div>
+            <div class="cdetail-label">Phone</div>
+            <div class="cdetail-val"><a href="tel:+254725865855">+254 725 865 855</a></div>
+          </div>
+        </div>
+        <div class="cdetail">
+          <div class="cdetail-icon">✉️</div>
+          <div>
+            <div class="cdetail-label">Email</div>
+            <div class="cdetail-val"><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a></div>
+          </div>
+        </div>
+        <div class="cdetail">
+          <div class="cdetail-icon">🌐</div>
+          <div>
+            <div class="cdetail-label">Website</div>
+            <div class="cdetail-val"><a href="https://www.emeraldkenya.com" target="_blank">emeraldkenya.com</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a class="social-btn" href="https://www.facebook.com/ehospitalitymgt" target="_blank">Facebook</a>
+        <a class="social-btn" href="https://www.emeraldkenya.com" target="_blank">Website</a>
+        <a class="social-btn" href="mailto:md@emeraldkenya.com">Email Us</a>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3>Request a Personalised Proposal</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+254 ..."/>
+      </div>
+      <div class="form-group">
+        <label>Service Interested In</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Market Analysis & Feasibility</option>
+          <option>Business Plan & Development</option>
+          <option>Pre-Opening Support</option>
+          <option>Project Management</option>
+          <option>Operational Support</option>
+          <option>Full Hotel Management</option>
+          <option>F&B Concept Development</option>
+          <option>Training Programs</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Your Project</label>
+        <textarea placeholder="Describe your property, location, and what you're looking to achieve..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleSubmit(event)">Send Proposal Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">THE <span>EMERALD</span> 4 Hospitality Management Consult</div>
+  <div class="footer-copy">© 2025 The Emerald for Hospitality Management Dynamics Ltd. · Mombasa, Kenya</div>
+  <div class="footer-links">
+    <a href="https://www.emeraldkenya.com" target="_blank">emeraldkenya.com</a>
+    <a href="https://www.facebook.com/ehospitalitymgt" target="_blank">Facebook</a>
+    <a href="mailto:md@emeraldkenya.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // ── NAV scroll effect ──
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  nav.classList.add('scrolled'); // always solid
+
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // ── Hero Slideshow ──
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0, timer;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i+1));
+    d.onclick = () => goSlide(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goSlide(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    resetTimer();
+  }
+
+  function moveSlide(dir) { goSlide(current + dir); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goSlide(current + 1), 5500);
+  }
+  resetTimer();
+
+  // ── Service Tabs ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.spanel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── Scroll Reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Sent! We\'ll be in touch shortly.';
+    btn.style.background = 'var(--g1)';
+    setTimeout(() => {
+      btn.textContent = 'Send Proposal Request →';
+      btn.style.background = '';
+    }, 4000);
+  }
+</script>
+</body>
+</html>
