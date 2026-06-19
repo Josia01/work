@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact Us | The Emerald 4 Hospitality Management Consult</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --g1: #0b4a2a; --g2: #156637; --g3: #1f9950; --g4: #c5f0d5; --g5: #e8f7ee;
+  --sand: #f4f0e6; --warm: #fffdf8; --ink: #182420; --mid: #4a5e56; --muted: #8fa39a;
+  --gold: #b8941e; --gold-l: #e8c84a; --white: #ffffff; --r: 8px; --nav-h: 74px;
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.07); --shadow-md: 0 8px 32px rgba(0,0,0,.12); --shadow-lg: 0 20px 60px rgba(0,0,0,.18);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--warm); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #eee; } ::-webkit-scrollbar-thumb { background: var(--g2); border-radius: 3px; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: var(--nav-h); background: rgba(11,74,42,.97); box-shadow: 0 2px 24px rgba(0,0,0,.25); }
+.nav-gem { width: 28px; height: 28px; flex-shrink: 0; background: linear-gradient(135deg, var(--g3), var(--g1)); clip-path: polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%); }
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: .02em; line-height: 1.1; }
+.nav-name small { font-family: 'DM Sans', sans-serif; font-size: .58rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); display: block; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.78); font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; font-weight: 500; padding-bottom: 3px; border-bottom: 2px solid transparent; transition: all .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; border-bottom-color: var(--g3); }
+.nav-btn { padding: 9px 20px; background: var(--g3); color: #fff; border: none; border-radius: var(--r); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s, transform .15s; }
+.nav-btn:hover { background: var(--g2); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.hamburger span { width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: .3s; display: block; }
+.page-hero { height: 380px; position: relative; overflow: hidden; display: flex; align-items: flex-end; background-size: cover; background-position: center; margin-top: var(--nav-h); }
+.page-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(11,74,42,.78) 0%, rgba(11,74,42,.35) 100%); }
+.page-hero-content { position: relative; z-index: 1; padding: 0 8vw 48px; }
+.page-hero-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--g4); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.page-hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--g4); display: block; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 700; color: #fff; line-height: 1.1; }
+.page-hero p { margin-top: 12px; font-size: .97rem; color: rgba(255,255,255,.7); max-width: 520px; line-height: 1.65; }
+.sec { padding: 88px 8vw; }
+.sec-sm { padding: 56px 8vw; }
+.sec-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--g2); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.sec-eyebrow::after { content: ''; flex: 0 0 26px; height: 1px; background: var(--g2); }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.85rem, 3.2vw, 2.7rem); font-weight: 700; color: var(--ink); line-height: 1.18; margin-bottom: 14px; }
+.sec-title.w { color: #fff; }
+.sec-desc { font-size: .96rem; line-height: 1.75; color: var(--mid); max-width: 560px; }
+.sec-desc.w { color: rgba(255,255,255,.65); }
+.sec-header-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn { display: inline-block; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; border-radius: var(--r); transition: all .2s; }
+.btn-primary { padding: 13px 30px; background: var(--g3); color: #fff; font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-primary:hover { background: var(--g2); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-outline { padding: 12px 28px; background: transparent; color: var(--g2); border: 1.5px solid var(--g2); font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-outline:hover { background: var(--g2); color: #fff; }
+.btn-outline-w { padding: 12px 28px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-outline-w:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.tag { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; background: var(--g5); color: var(--g1); padding: 3px 10px; border-radius: 20px; font-weight: 600; display: inline-block; }
+.divider { width: 48px; height: 3px; background: var(--g3); border-radius: 2px; margin: 20px 0; }
+.divider.center { margin: 20px auto; }
+.cta-strip { background: linear-gradient(135deg, var(--g1), #061f12); padding: 72px 8vw; text-align: center; }
+.cta-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 700; color: #fff; margin-bottom: 14px; }
+.cta-strip p { color: rgba(255,255,255,.6); font-size: .97rem; max-width: 500px; margin: 0 auto 32px; line-height: 1.7; }
+.cta-strip-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+footer { background: #06140d; }
+.footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.4fr; gap: 48px; padding: 64px 8vw 48px; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-gem { width: 28px; height: 28px; flex-shrink: 0; background: linear-gradient(135deg, var(--g3), var(--g1)); clip-path: polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%); }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,.55); }
+.footer-brand span { color: var(--g3); }
+.footer-tagline { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+.footer-about { font-size: .83rem; color: rgba(255,255,255,.38); line-height: 1.65; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.fsoc { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.45); font-size: .85rem; text-decoration: none; font-weight: 700; transition: all .2s; }
+.fsoc:hover { background: var(--g2); color: #fff; border-color: var(--g2); }
+.footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+.footer-nav { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-nav a { font-size: .84rem; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+.footer-nav a:hover { color: var(--g3); }
+.footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-contact-list li { display: flex; gap: 10px; align-items: flex-start; font-size: .83rem; color: rgba(255,255,255,.45); }
+.fci { flex-shrink: 0; }
+.footer-contact-list a { color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+.footer-contact-list a:hover { color: var(--g3); }
+.footer-bottom { padding: 20px 8vw; border-top: 1px solid rgba(255,255,255,.06); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .74rem; color: rgba(255,255,255,.22); }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal-right.visible { opacity: 1; transform: none; }
+@media (max-width: 960px) {
+  .nav-links { display: none; } .hamburger { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,74,42,.98); padding: 28px 5vw; gap: 22px; box-shadow: 0 12px 40px rgba(0,0,0,.3); z-index: 499; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .sec { padding: 60px 5vw; } .sec-sm { padding: 40px 5vw; } .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 40px 5vw 32px; } .footer-bottom { flex-direction: column; gap: 6px; } .page-hero { height: 300px; }
+}
+#contact-main { background: var(--warm); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+.contact-info h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+.cinfo-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+.cinfo-item { display: flex; gap: 16px; align-items: flex-start; }
+.cinfo-icon { width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0; background: var(--g5); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.cinfo-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g2); margin-bottom: 4px; }
+.cinfo-val { font-size: .92rem; color: var(--ink); }
+.cinfo-val a { color: var(--ink); text-decoration: none; transition: color .2s; }
+.cinfo-val a:hover { color: var(--g2); }
+.social-row { display: flex; gap: 10px; margin-bottom: 40px; }
+.soc-btn { padding: 9px 18px; border-radius: 6px; border: 1.5px solid #ddd; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: all .2s; }
+.soc-btn:hover { border-color: var(--g2); color: var(--g2); background: var(--g5); }
+.hours-box { background: var(--g1); border-radius: 12px; padding: 26px; color: #fff; }
+.hours-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--g4); margin-bottom: 16px; }
+.hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: .84rem; }
+.hours-row:last-child { border-bottom: none; }
+.hours-row span:first-child { color: rgba(255,255,255,.55); }
+.hours-row span:last-child { color: #fff; font-weight: 500; }
+.contact-form-box { background: #fff; border-radius: 16px; padding: 44px; box-shadow: 0 4px 40px rgba(0,0,0,.09); }
+.contact-form-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.contact-form-box p { font-size: .85rem; color: var(--mid); margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); margin-bottom: 7px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 16px; background: var(--warm); border: 1.5px solid #e0d8cc; border-radius: 8px; color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: .9rem; outline: none; transition: border-color .2s, background .2s; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--g2); background: #fff; box-shadow: 0 0 0 3px rgba(31,153,80,.08); }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa39a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group.full { grid-column: 1/-1; }
+.radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.radio-opt { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1.5px solid #e0d8cc; border-radius: 8px; cursor: pointer; font-size: .84rem; color: var(--mid); transition: all .2s; }
+.radio-opt input { width: auto; padding: 0; background: none; border: none; cursor: pointer; accent-color: var(--g2); }
+.radio-opt:has(input:checked) { border-color: var(--g2); background: var(--g5); color: var(--g1); font-weight: 500; }
+.btn-submit { width: 100%; padding: 15px; background: var(--g2); color: #fff; border: none; border-radius: 8px; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s, transform .15s, box-shadow .2s; }
+.btn-submit:hover { background: var(--g1); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(11,74,42,.25); }
+.form-note { text-align: center; font-size: .75rem; color: var(--muted); margin-top: 14px; }
+.form-success { display: none; text-align: center; padding: 40px 20px; }
+.form-success-icon { font-size: 3rem; margin-bottom: 16px; }
+.form-success h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.form-success p { font-size: .9rem; color: var(--mid); line-height: 1.65; }
+#map-section { background: var(--sand); padding: 0; }
+.map-wrap { position: relative; height: 420px; overflow: hidden; }
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(20%); }
+.map-card { position: absolute; top: 32px; left: 8vw; z-index: 2; background: var(--g1); color: #fff; padding: 28px 28px; border-radius: 12px; max-width: 280px; box-shadow: 0 8px 32px rgba(0,0,0,.25); }
+.map-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--g4); margin-bottom: 12px; }
+.map-card-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; font-size: .83rem; color: rgba(255,255,255,.7); }
+.map-card-row span:first-child { flex-shrink: 0; }
+.map-card-row a { color: rgba(255,255,255,.7); text-decoration: none; }
+.map-card-row a:hover { color: var(--g4); }
+#faq { background: var(--warm); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.faq-item { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.faq-q { width: 100%; text-align: left; padding: 20px 22px; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 600; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+.faq-q:hover { color: var(--g2); }
+.faq-arrow { font-size: .85rem; color: var(--g2); flex-shrink: 0; transition: transform .3s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s; padding: 0 22px; font-size: .86rem; color: var(--mid); line-height: 1.7; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 22px 20px; }
+#quick { background: var(--g1); padding: 64px 8vw; }
+.quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin-top: 40px; }
+.qcard { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 26px 22px; text-decoration: none; display: flex; flex-direction: column; gap: 10px; transition: background .2s, transform .2s; }
+.qcard:hover { background: rgba(255,255,255,.11); transform: translateY(-3px); }
+.qcard-icon { font-size: 1.5rem; }
+.qcard h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; font-weight: 700; color: #fff; }
+.qcard p { font-size: .81rem; color: rgba(255,255,255,.5); line-height: 1.55; }
+.qcard-arrow { font-size: .8rem; color: var(--g3); margin-top: 4px; }
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; } .faq-grid { grid-template-columns: 1fr; }
+  .map-card { position: static; max-width: 100%; border-radius: 0; box-shadow: none; } .map-wrap { height: auto; } .map-wrap iframe { height: 320px; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; } .radio-group { grid-template-columns: 1fr; } .contact-form-box { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-gem"></div>
+    <div class="nav-name">The Emerald <small>4 Hospitality Management Consult</small></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="about.html" >About</a></li>
+    <li><a href="services.html" >Services</a></li>
+    <li><a href="gallery.html" >Portfolio</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a class="nav-btn" href="contact.html">Get a Proposal</a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1400&q=80')">
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Get in Touch</div>
+    <h1>Let Us Give You Solutions.</h1>
+    <p>Contact us to learn about our philosophy and receive a personalised proposal for your hospitality project.</p>
+  </div>
+</div>
+
+<section id="contact-main" class="sec">
+  <div class="contact-grid">
+
+    <div class="reveal-left">
+      <div class="sec-eyebrow">Contact Details</div>
+      <h2 class="contact-info">Let's Start a Conversation</h2>
+      <p style="font-size:.96rem;line-height:1.75;color:var(--mid);margin-bottom:36px;">Whether you're a hotel owner, investor, developer, or simply exploring options — we'd love to hear about your project and discuss how The Emerald can help.</p>
+
+      <div class="cinfo-list">
+        <div class="cinfo-item">
+          <div class="cinfo-icon">📍</div>
+          <div><div class="cinfo-label">Location</div><div class="cinfo-val"><span>Mombasa, Kenya</span></div></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">📞</div>
+          <div><div class="cinfo-label">Phone</div><div class="cinfo-val"><a href="tel:+254725865855">+254 725 865 855</a></div></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">✉️</div>
+          <div><div class="cinfo-label">Email</div><div class="cinfo-val"><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a></div></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">🌐</div>
+          <div><div class="cinfo-label">Website</div><div class="cinfo-val"><a href="https://www.emeraldkenya.com" target="_blank">www.emeraldkenya.com</a></div></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">📘</div>
+          <div><div class="cinfo-label">Facebook</div><div class="cinfo-val"><a href="https://www.facebook.com/ehospitalitymgt" target="_blank">facebook.com/ehospitalitymgt</a></div></div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a class="soc-btn" href="https://www.facebook.com/ehospitalitymgt" target="_blank">Facebook</a>
+        <a class="soc-btn" href="mailto:md@emeraldkenya.com">Email</a>
+        <a class="soc-btn" href="https://www.emeraldkenya.com" target="_blank">Website</a>
+      </div>
+
+      <div class="hours-box">
+        <h4>Office Hours</h4>
+        <div class="hours-row"><span>Monday – Friday</span><span>8:00 AM – 6:00 PM EAT</span></div>
+        <div class="hours-row"><span>Saturday</span><span>9:00 AM – 2:00 PM EAT</span></div>
+        <div class="hours-row"><span>Sunday</span><span>By Appointment</span></div>
+        <div class="hours-row"><span>Emergency Line</span><span>Available 24/7</span></div>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div class="contact-form-box">
+        <h3>Request a Personalised Proposal</h3>
+        <p>Fill in the details below and we'll get back to you within one business day.</p>
+
+        <div id="contactForm">
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" id="fname" placeholder="John" required/></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" id="lname" placeholder="Doe" required/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@company.com" required/></div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+254 ..."/></div>
+          </div>
+          <div class="form-group"><label>Company / Organisation</label><input type="text" id="company" placeholder="Your company name"/></div>
+          <div class="form-group">
+            <label>I am a... *</label>
+            <div class="radio-group">
+              <label class="radio-opt"><input type="radio" name="role" value="owner"/> Hotel Owner</label>
+              <label class="radio-opt"><input type="radio" name="role" value="investor"/> Investor</label>
+              <label class="radio-opt"><input type="radio" name="role" value="developer"/> Developer</label>
+              <label class="radio-opt"><input type="radio" name="role" value="other"/> Other</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Service of Interest *</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Market Analysis & Feasibility Study</option>
+              <option>Business Plan & Concept Development</option>
+              <option>Pre-Opening Support</option>
+              <option>Project Management</option>
+              <option>Full Hotel Management</option>
+              <option>F&B Concept Development</option>
+              <option>Operational Support & Advisory</option>
+              <option>Training Programs</option>
+              <option>Not Sure — Please Advise</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Property Location</label><input type="text" id="location" placeholder="e.g. Mombasa, Nairobi, Zanzibar..."/></div>
+          <div class="form-group"><label>Tell Us About Your Project *</label><textarea id="message" placeholder="Describe your property, current situation, timeline, and what you're hoping to achieve..."></textarea></div>
+          <button class="btn-submit" onclick="submitForm()">Send Proposal Request →</button>
+          <p class="form-note">🔒 Your information is kept strictly confidential and never shared with third parties.</p>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">✅</div>
+          <h4>Message Sent Successfully!</h4>
+          <p>Thank you for reaching out. A member of The Emerald team will be in contact with you within one business day to discuss your project.</p>
+          <div style="margin-top:24px;"><a class="btn btn-primary" href="services.html">Explore Our Services</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="map-section">
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127616.82285397167!2d39.5766!3d-4.0435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x184012ef96178cf5%3A0xf23c33d55f78462f!2sMombasa%2C%20Kenya!5e0!3m2!1sen!2sus!4v1700000000000"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Emerald Office Location - Mombasa, Kenya">
+    </iframe>
+    <div class="map-card">
+      <h4>📍 Find Us in Mombasa</h4>
+      <div class="map-card-row"><span>🏢</span><span>The Emerald 4 Hospitality Management Consult</span></div>
+      <div class="map-card-row"><span>📞</span><a href="tel:+254725865855">+254 725 865 855</a></div>
+      <div class="map-card-row"><span>✉️</span><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a></div>
+      <div class="map-card-row"><span>🕐</span><span>Mon–Fri: 8AM – 6PM EAT</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="sec">
+  <div class="sec-eyebrow">FAQ</div>
+  <h2 class="sec-title">Frequently Asked Questions</h2>
+  <p class="sec-desc">Answers to the most common questions we receive from hotel owners, investors, and developers.</p>
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What types of properties do you work with?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">We work across boutique hotels, full-service hotels, luxury resorts, spa and wellness retreats, mixed-use developments, serviced apartments, and standalone restaurant and F&B operations. We have particular expertise in niche and independent properties that benefit most from specialist management rather than branded chains.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you only operate in Kenya?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">Our headquarters and primary operations are in Mombasa, Kenya, and we have deep local expertise across the Kenyan coastal and urban markets. However, we have consulted on projects across East Africa and leverage our UNWTO partnership to bring global market intelligence to every engagement.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How are your management contracts structured?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">We offer hybrid management contracts that are highly linked to outcomes with fully transparent cost structures. Rather than flat fees regardless of performance, our model aligns our incentives directly with your property's success — we do well when you do well. Specific terms are tailored to each engagement.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does a feasibility study take?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">A comprehensive feasibility and market study typically takes 6–10 weeks depending on the scope, data availability, and complexity of the market. This includes competition analysis, demand assessment, financial modelling, and concept recommendation. We can expedite preliminary findings if you have investor timelines to meet.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can you help if my hotel is already open but underperforming?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">Absolutely. Operational turnaround and repositioning is a core service. We conduct a thorough assessment of the financial situation, operational matrix, distribution channels, and market positioning, then develop a strategic programme to restore profitability. We also offer emergency interim management for immediate stabilisation.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the Pearl-Management platform?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">Pearl-Management is our proprietary management platform created in 2016 specifically for boutique and niche properties. It provides a structured operational framework adapted to smaller independent hotels that typically lack access to the management systems used by large branded chains — delivering enterprise-level performance in a right-sized package.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you work with international investors unfamiliar with Kenya?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">Yes — this is one of our most valued services. We bridge the gap between international capital and local execution. We provide market intelligence, regulatory guidance, local supplier networks, and on-the-ground management so that investors can enter the East African hospitality market with confidence and clear visibility.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do we get started?<span class="faq-arrow">▼</span></button>
+      <div class="faq-a">Simply send us a message using the form on this page, or email us directly at md@emeraldkenya.com. We'll arrange an initial call to understand your project, and within a few days provide a proposal outlining the recommended approach, scope of work, timeline, and fee structure — at no obligation to you.</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="quick">
+  <div class="sec-eyebrow" style="color:var(--g4);"><span style="width:22px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px;"></span>Explore Further</div>
+  <h2 class="sec-title w">Where Would You Like to Go Next?</h2>
+  <div class="quick-grid">
+    <a class="qcard" href="about.html">
+      <div class="qcard-icon">🏛️</div><h4>About The Emerald</h4>
+      <p>Our story, team, values, and fourteen years of hospitality expertise in East Africa.</p>
+      <div class="qcard-arrow">Learn more →</div>
+    </a>
+    <a class="qcard" href="services.html">
+      <div class="qcard-icon">📋</div><h4>Our Services</h4>
+      <p>Full details on everything from market analysis and pre-opening to hotel management and F&B development.</p>
+      <div class="qcard-arrow">See all services →</div>
+    </a>
+    <a class="qcard" href="gallery.html">
+      <div class="qcard-icon">🖼️</div><h4>Portfolio & Gallery</h4>
+      <p>Photo gallery, slideshow showcase, and featured project case studies from our engagements.</p>
+      <div class="qcard-arrow">View portfolio →</div>
+    </a>
+    <a class="qcard" href="mailto:md@emeraldkenya.com">
+      <div class="qcard-icon">✉️</div><h4>Email Us Directly</h4>
+      <p>Prefer email? Reach our managing director directly at md@emeraldkenya.com for a prompt response.</p>
+      <div class="qcard-arrow">Send email →</div>
+    </a>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Ready to Transform Your Hospitality Project?</h2>
+  <p>The Emerald team is ready to listen, advise, and deliver. Let's build something great together.</p>
+  <div class="cta-strip-actions">
+    <a class="btn btn-primary" href="tel:+254725865855">Call Us Now</a>
+    <a class="btn btn-outline-w" href="mailto:md@emeraldkenya.com">Send an Email</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-logo-wrap">
+        <div class="footer-gem"></div>
+        <div><div class="footer-brand">THE <span>EMERALD</span></div><div class="footer-tagline">4 Hospitality Management Consult</div></div>
+      </div>
+      <p class="footer-about">Strategic consultancy and management specializing in the hospitality industry. Local knowledge combined with international experience.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/ehospitalitymgt" target="_blank" class="fsoc" aria-label="Facebook">f</a>
+        <a href="mailto:md@emeraldkenya.com" class="fsoc" aria-label="Email">@</a>
+        <a href="https://www.emeraldkenya.com" target="_blank" class="fsoc" aria-label="Website">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="gallery.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-nav"><li><a href="services.html#consulting">Market Analysis</a></li><li><a href="services.html#preopening">Pre-Opening Support</a></li><li><a href="services.html#management">Hotel Management</a></li><li><a href="services.html#training">Training Programs</a></li><li><a href="services.html#fb">F&amp;B Development</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-contact-list">
+        <li><span class="fci">📍</span>Mombasa, Kenya</li>
+        <li><span class="fci">📞</span><a href="tel:+254725865855">+254 725 865 855</a></li>
+        <li><span class="fci">✉️</span><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a></li>
+        <li><span class="fci">🌐</span><a href="https://www.emeraldkenya.com" target="_blank">emeraldkenya.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Emerald for Hospitality Management Dynamics Ltd. All rights reserved.</span>
+    <span>Incorporated in Kenya · PVT-5JUE7J58</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el){ ro.observe(el); });
+
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function submitForm() {
+    var fname = document.getElementById('fname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var service = document.getElementById('service').value;
+    var message = document.getElementById('message').value.trim();
+
+    if (!fname || !email || !service || !message) {
+      alert('Please fill in all required fields (marked with *).');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    var btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    setTimeout(function(){
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 1200);
+  }
+</script>
+</body>
+</html>

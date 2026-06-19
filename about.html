@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us | The Emerald 4 Hospitality Management Consult</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --g1: #0b4a2a; --g2: #156637; --g3: #1f9950; --g4: #c5f0d5; --g5: #e8f7ee;
+  --sand: #f4f0e6; --warm: #fffdf8; --ink: #182420; --mid: #4a5e56; --muted: #8fa39a;
+  --gold: #b8941e; --gold-l: #e8c84a; --white: #ffffff; --r: 8px; --nav-h: 74px;
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.07); --shadow-md: 0 8px 32px rgba(0,0,0,.12); --shadow-lg: 0 20px 60px rgba(0,0,0,.18);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--warm); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #eee; } ::-webkit-scrollbar-thumb { background: var(--g2); border-radius: 3px; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: var(--nav-h); background: rgba(11,74,42,.97); box-shadow: 0 2px 24px rgba(0,0,0,.25); }
+.nav-gem { width: 28px; height: 28px; flex-shrink: 0; background: linear-gradient(135deg, var(--g3), var(--g1)); clip-path: polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%); }
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: .02em; line-height: 1.1; }
+.nav-name small { font-family: 'DM Sans', sans-serif; font-size: .58rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); display: block; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.78); font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; font-weight: 500; padding-bottom: 3px; border-bottom: 2px solid transparent; transition: all .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; border-bottom-color: var(--g3); }
+.nav-btn { padding: 9px 20px; background: var(--g3); color: #fff; border: none; border-radius: var(--r); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s, transform .15s; }
+.nav-btn:hover { background: var(--g2); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.hamburger span { width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: .3s; display: block; }
+.page-hero { height: 380px; position: relative; overflow: hidden; display: flex; align-items: flex-end; background-size: cover; background-position: center; margin-top: var(--nav-h); }
+.page-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(11,74,42,.78) 0%, rgba(11,74,42,.35) 100%); }
+.page-hero-content { position: relative; z-index: 1; padding: 0 8vw 48px; }
+.page-hero-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--g4); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.page-hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--g4); display: block; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 700; color: #fff; line-height: 1.1; }
+.page-hero p { margin-top: 12px; font-size: .97rem; color: rgba(255,255,255,.7); max-width: 520px; line-height: 1.65; }
+.sec { padding: 88px 8vw; }
+.sec-sm { padding: 56px 8vw; }
+.sec-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--g2); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.sec-eyebrow::after { content: ''; flex: 0 0 26px; height: 1px; background: var(--g2); }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.85rem, 3.2vw, 2.7rem); font-weight: 700; color: var(--ink); line-height: 1.18; margin-bottom: 14px; }
+.sec-title.w { color: #fff; }
+.sec-desc { font-size: .96rem; line-height: 1.75; color: var(--mid); max-width: 560px; }
+.sec-desc.w { color: rgba(255,255,255,.65); }
+.sec-header-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn { display: inline-block; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; border-radius: var(--r); transition: all .2s; }
+.btn-primary { padding: 13px 30px; background: var(--g3); color: #fff; font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-primary:hover { background: var(--g2); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-outline { padding: 12px 28px; background: transparent; color: var(--g2); border: 1.5px solid var(--g2); font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-outline:hover { background: var(--g2); color: #fff; }
+.btn-outline-w { padding: 12px 28px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); font-size: .87rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.btn-outline-w:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.tag { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; background: var(--g5); color: var(--g1); padding: 3px 10px; border-radius: 20px; font-weight: 600; display: inline-block; }
+.divider { width: 48px; height: 3px; background: var(--g3); border-radius: 2px; margin: 20px 0; }
+.divider.center { margin: 20px auto; }
+.cta-strip { background: linear-gradient(135deg, var(--g1), #061f12); padding: 72px 8vw; text-align: center; }
+.cta-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 700; color: #fff; margin-bottom: 14px; }
+.cta-strip p { color: rgba(255,255,255,.6); font-size: .97rem; max-width: 500px; margin: 0 auto 32px; line-height: 1.7; }
+.cta-strip-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+footer { background: #06140d; }
+.footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.4fr; gap: 48px; padding: 64px 8vw 48px; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-gem { width: 28px; height: 28px; flex-shrink: 0; background: linear-gradient(135deg, var(--g3), var(--g1)); clip-path: polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%); }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,.55); }
+.footer-brand span { color: var(--g3); }
+.footer-tagline { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+.footer-about { font-size: .83rem; color: rgba(255,255,255,.38); line-height: 1.65; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.fsoc { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.45); font-size: .85rem; text-decoration: none; font-weight: 700; transition: all .2s; }
+.fsoc:hover { background: var(--g2); color: #fff; border-color: var(--g2); }
+.footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+.footer-nav { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-nav a { font-size: .84rem; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+.footer-nav a:hover { color: var(--g3); }
+.footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-contact-list li { display: flex; gap: 10px; align-items: flex-start; font-size: .83rem; color: rgba(255,255,255,.45); }
+.fci { flex-shrink: 0; }
+.footer-contact-list a { color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+.footer-contact-list a:hover { color: var(--g3); }
+.footer-bottom { padding: 20px 8vw; border-top: 1px solid rgba(255,255,255,.06); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .74rem; color: rgba(255,255,255,.22); }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal-right.visible { opacity: 1; transform: none; }
+@media (max-width: 960px) {
+  .nav-links { display: none; } .hamburger { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,74,42,.98); padding: 28px 5vw; gap: 22px; box-shadow: 0 12px 40px rgba(0,0,0,.3); z-index: 499; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .sec { padding: 60px 5vw; } .sec-sm { padding: 40px 5vw; } .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 40px 5vw 32px; } .footer-bottom { flex-direction: column; gap: 6px; } .page-hero { height: 300px; }
+}
+#story { background: var(--warm); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.story-img { position: relative; border-radius: 12px; overflow: hidden; height: 520px; }
+.story-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s; display: block; }
+.story-img:hover img { transform: scale(1.04); }
+.story-floater { position: absolute; top: 28px; right: 28px; background: var(--g1); color: #fff; padding: 20px; border-radius: 10px; text-align: center; max-width: 140px; }
+.story-floater b { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: var(--g4); line-height: 1; }
+.story-floater span { font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.story-text p { font-size: .96rem; line-height: 1.8; color: var(--mid); margin-bottom: 18px; }
+.story-text p strong { color: var(--ink); font-weight: 600; }
+.story-milestones { margin-top: 32px; display: flex; flex-direction: column; gap: 0; }
+.milestone { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid #eee; }
+.milestone:last-child { border-bottom: none; }
+.mile-year { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--g2); flex-shrink: 0; width: 60px; line-height: 1.2; }
+.mile-text h4 { font-size: .91rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.mile-text p { font-size: .82rem; color: var(--mid); line-height: 1.5; }
+#values { background: var(--sand); }
+.values-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 22px; }
+.vcard { background: #fff; border-radius: 12px; padding: 32px 26px; box-shadow: var(--shadow-sm); border-top: 4px solid var(--g3); transition: transform .2s, box-shadow .2s; }
+.vcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.vcard-icon { font-size: 2rem; margin-bottom: 16px; }
+.vcard h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.vcard p { font-size: .84rem; color: var(--mid); line-height: 1.65; }
+#team { background: var(--warm); }
+.team-intro { max-width: 640px; margin-bottom: 48px; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 28px; }
+.tcard { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow .2s, transform .2s; }
+.tcard:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.tcard-img { height: 260px; overflow: hidden; }
+.tcard-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; display: block; }
+.tcard:hover .tcard-img img { transform: scale(1.05); }
+.tcard-body { padding: 22px; }
+.tcard-name { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 700; color: var(--ink); }
+.tcard-role { font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); margin: 4px 0 10px; }
+.tcard-bio { font-size: .83rem; color: var(--mid); line-height: 1.6; }
+.tcard-tags { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+#edge { background: var(--g1); }
+.edge-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 2px; background: rgba(255,255,255,.05); }
+.ecard { background: var(--g1); padding: 36px 28px; border: 1px solid rgba(255,255,255,.07); transition: background .25s; }
+.ecard:hover { background: rgba(255,255,255,.07); }
+.ecard-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: rgba(255,255,255,.08); line-height: 1; margin-bottom: 6px; }
+.ecard h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.ecard p { font-size: .83rem; color: rgba(255,255,255,.5); line-height: 1.65; }
+#cert { background: var(--sand); }
+.cert-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.cert-img { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); }
+.cert-img img { width: 100%; display: block; }
+.cert-detail p { font-size: .9rem; color: var(--mid); line-height: 1.75; margin-bottom: 14px; }
+.cert-row { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid #e8e0d0; }
+.cert-row:last-child { border-bottom: none; }
+.cert-row span { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); width: 110px; flex-shrink: 0; }
+.cert-row p { font-size: .86rem; color: var(--mid); margin: 0; }
+#partners { background: var(--ink); padding: 72px 8vw; }
+.partners-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 2px; }
+.pcard { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); padding: 28px 20px; text-align: center; transition: background .2s; }
+.pcard:hover { background: rgba(255,255,255,.08); }
+.pcard-icon { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+.pcard-name { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.55); letter-spacing: .06em; }
+.pcard-type { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-top: 4px; }
+@media (max-width: 960px) { .story-grid, .cert-wrap { grid-template-columns: 1fr; } .story-img { height: 320px; } }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-gem"></div>
+    <div class="nav-name">The Emerald <small>4 Hospitality Management Consult</small></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html" >Services</a></li>
+    <li><a href="gallery.html" >Portfolio</a></li>
+    <li><a href="contact.html" >Contact</a></li>
+  </ul>
+  <a class="nav-btn" href="contact.html">Get a Proposal</a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1400&q=80')">
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Our Story</div>
+    <h1>About The Emerald</h1>
+    <p>Fourteen years of transforming hospitality projects across East Africa and beyond — built on practical experience, not theory.</p>
+  </div>
+</div>
+
+<section id="story" class="sec">
+  <div class="story-grid">
+    <div class="reveal-left">
+      <div class="story-img">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80" alt="Hotel exterior Mombasa" loading="lazy"/>
+        <div class="story-floater"><b>2010</b><span>Founded in Mombasa</span></div>
+      </div>
+    </div>
+    <div class="reveal-right">
+      <div class="sec-eyebrow">Our Story</div>
+      <h2 class="sec-title">Built on Local Knowledge & International Know-How</h2>
+      <div class="divider"></div>
+      <div class="story-text">
+        <p>The Emerald 4 Hospitality Management Consult was founded in <strong>Mombasa, Kenya in 2010</strong> with a clear mission: to bridge the gap between local hospitality potential and international operational standards.</p>
+        <p>Over fourteen years, we have extended our services from <strong>market studies and project supervision</strong> to full concept development and hotel & restaurant management — serving hotel owners, investors, developers, and financial institutions across East Africa.</p>
+        <p>In 2016, we launched the <strong>Pearl-Management platform</strong> — a proprietary management approach for boutique and niche properties, enabling us to bring high-performance operations to smaller, independent hotels that typically go without expert management support.</p>
+        <p>Today, The Emerald is formally incorporated as <strong>The Emerald for Hospitality Management Dynamics Limited</strong>, a Kenyan private limited company regulated under the Companies Act 2015.</p>
+      </div>
+      <div class="story-milestones">
+        <div class="milestone"><div class="mile-year">2010</div><div class="mile-text"><h4>Company Founded</h4><p>Established in Mombasa with a focus on market studies and project supervision.</p></div></div>
+        <div class="milestone"><div class="mile-year">2014</div><div class="mile-text"><h4>Full Management Services</h4><p>Expanded into full hotel and restaurant management for boutique properties.</p></div></div>
+        <div class="milestone"><div class="mile-year">2016</div><div class="mile-text"><h4>Pearl-Management Launched</h4><p>Proprietary management platform created for niche and boutique properties.</p></div></div>
+        <div class="milestone"><div class="mile-year">2022</div><div class="mile-text"><h4>Formal Incorporation</h4><p>Incorporated as a Private Limited Company under Kenya's Companies Act 2015.</p></div></div>
+        <div class="milestone"><div class="mile-year">Now</div><div class="mile-text"><h4>14+ Years Strong</h4><p>Continuing to grow across luxury, health, resort, and mixed-use segments.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="values" class="sec">
+  <div class="sec-eyebrow">Our Values</div>
+  <h2 class="sec-title">What Drives Every Engagement</h2>
+  <p class="sec-desc">These aren't aspirational statements — they are the operating principles behind every project we take on.</p>
+  <div class="values-grid">
+    <div class="vcard reveal"><div class="vcard-icon">🎯</div><h3>Results First</h3><p>Every recommendation we make is grounded in measurable outcomes. We only succeed when your project succeeds — that's not a slogan, it's in our contracts.</p></div>
+    <div class="vcard reveal"><div class="vcard-icon">🌍</div><h3>Local Roots, Global Standards</h3><p>We understand the East African market from the inside. We combine that knowledge with international hospitality best practices that we've applied across multiple markets.</p></div>
+    <div class="vcard reveal"><div class="vcard-icon">🤝</div><h3>Win-Win Philosophy</h3><p>We identify opportunities that benefit project leaders, investors, and banks equally. Good partnerships are built on shared success, not zero-sum negotiations.</p></div>
+    <div class="vcard reveal"><div class="vcard-icon">💎</div><h3>Practical Over Theoretical</h3><p>100% of our team has hands-on operational experience as managers and consultants. We've worked in the kitchens, on the front desk, and in the boardroom.</p></div>
+    <div class="vcard reveal"><div class="vcard-icon">🔍</div><h3>Transparency</h3><p>Hybrid management contracts that are tightly linked to outcomes with transparent costs. No hidden incentives, no ambiguous terms — just clear accountability.</p></div>
+    <div class="vcard reveal"><div class="vcard-icon">📈</div><h3>Long-Term Vision</h3><p>We create projects linked with disciplined planning and a long-term perspective that protects and compounds your investment over time.</p></div>
+  </div>
+</section>
+
+<section id="team" class="sec">
+  <div class="team-intro">
+    <div class="sec-eyebrow">Our Team</div>
+    <h2 class="sec-title">A Highly Qualified Executive Team</h2>
+    <p class="sec-desc">Our experience in various markets and our drive to deliver results set us apart. Every member of the Emerald team brings real operational experience — not just advisory credentials.</p>
+  </div>
+  <div class="team-grid">
+    <div class="tcard reveal">
+      <div class="tcard-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="Managing Director" loading="lazy"/></div>
+      <div class="tcard-body">
+        <div class="tcard-name">Managing Director</div>
+        <div class="tcard-role">Strategy & Leadership</div>
+        <p class="tcard-bio">Over 14 years leading hospitality projects across East Africa and Europe. Expert in strategic consultancy, market repositioning, and investor relations for hotel and F&B ventures.</p>
+        <div class="tcard-tags"><span class="tag">Strategy</span><span class="tag">Investor Relations</span><span class="tag">F&B</span></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="Operations Director" loading="lazy"/></div>
+      <div class="tcard-body">
+        <div class="tcard-name">Operations Director</div>
+        <div class="tcard-role">Hotel Operations</div>
+        <p class="tcard-bio">Former general manager with hands-on experience running boutique and full-service hotels. Specialist in daily operations, revenue management, and staff development programs.</p>
+        <div class="tcard-tags"><span class="tag">Operations</span><span class="tag">Revenue Mgmt</span><span class="tag">Training</span></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="Consulting Lead" loading="lazy"/></div>
+      <div class="tcard-body">
+        <div class="tcard-name">Consulting Lead</div>
+        <div class="tcard-role">Market Analysis & Feasibility</div>
+        <p class="tcard-bio">Specialist in hospitality feasibility studies, market research, and concept development. Collaborates with UNWTO for global trend intelligence applicable to African markets.</p>
+        <div class="tcard-tags"><span class="tag">Feasibility</span><span class="tag">UNWTO</span><span class="tag">Market Research</span></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-img"><img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&q=80" alt="F&B Director" loading="lazy"/></div>
+      <div class="tcard-body">
+        <div class="tcard-name">F&B Director</div>
+        <div class="tcard-role">Food & Beverage Concepts</div>
+        <p class="tcard-bio">Experienced in creating and repositioning food and beverage concepts across fine dining, casual, and resort environments. Trained at leading European hospitality schools.</p>
+        <div class="tcard-tags"><span class="tag">F&B Concepts</span><span class="tag">Fine Dining</span><span class="tag">Repositioning</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="edge" class="sec">
+  <div class="sec-eyebrow" style="color:var(--g4);"><span style="width:22px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px;"></span>Our Edge</div>
+  <h2 class="sec-title w">Why Clients Choose Emerald</h2>
+  <p class="sec-desc w">Creative, dynamic and profitable solutions for the success of your projects.</p>
+  <div class="edge-grid">
+    <div class="ecard reveal"><div class="ecard-num">01</div><h3>100% Practical Experience</h3><p>Our team has direct hands-on operational experience as managers and strategic consultants in various dynamic markets — not just advisory credentials.</p></div>
+    <div class="ecard reveal"><div class="ecard-num">02</div><h3>Win-Win Thinking</h3><p>We understand the win-win opportunities in each market for project leaders, investors, and banks — not a single-sided arrangement.</p></div>
+    <div class="ecard reveal"><div class="ecard-num">03</div><h3>Outcome-Linked Contracts</h3><p>Hybrid management contracts highly linked to outcomes and transparent costs. We succeed only when your project does.</p></div>
+    <div class="ecard reveal"><div class="ecard-num">04</div><h3>Maximum Cost Savings</h3><p>We leverage our large portfolio of projects and extensive network of contacts to maximise procurement savings and operational efficiency.</p></div>
+    <div class="ecard reveal"><div class="ecard-num">05</div><h3>Feasibility Before Brand</h3><p>We prioritise the maximum feasibility of the property before recommending any brand — ensuring the right fit, not the most convenient one.</p></div>
+    <div class="ecard reveal"><div class="ecard-num">06</div><h3>Long-Term Vision</h3><p>We create successful projects linked with planning and long-term perspective — building assets that deliver returns year after year.</p></div>
+  </div>
+</section>
+
+<section id="cert" class="sec">
+  <div class="cert-wrap">
+    <div class="reveal-left">
+      <div class="cert-img">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80" alt="Certificate of Incorporation" loading="lazy"/>
+      </div>
+    </div>
+    <div class="reveal-right">
+      <div class="sec-eyebrow">Legal Standing</div>
+      <h2 class="sec-title">Formally Incorporated in Kenya</h2>
+      <div class="divider"></div>
+      <div class="cert-detail">
+        <p>The Emerald for Hospitality Management Dynamics Limited is a formally registered company under Kenyan law, providing our clients with full legal assurance and accountability.</p>
+        <div class="cert-row"><span>Company Name</span><p>The Emerald for Hospitality Management Dynamics Limited</p></div>
+        <div class="cert-row"><span>Registration</span><p>PVT-5JUE7J58</p></div>
+        <div class="cert-row"><span>Incorporated</span><p>23 March 2022</p></div>
+        <div class="cert-row"><span>Type</span><p>Private Limited Company</p></div>
+        <div class="cert-row"><span>Jurisdiction</span><p>Republic of Kenya — Companies Act 2015</p></div>
+        <div class="cert-row"><span>Headquarters</span><p>Mombasa, Kenya</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="sec-eyebrow" style="color:var(--g4);"><span style="width:22px;height:1px;background:var(--g4);display:inline-block;vertical-align:middle;margin-right:10px;"></span>Our Partners</div>
+  <h2 class="sec-title w" style="margin-bottom:8px;">Education & Industry Partnerships</h2>
+  <p class="sec-desc w">We collaborate with leading global institutions to bring world-class knowledge and training to East African hospitality.</p>
+  <div class="partners-grid">
+    <div class="pcard"><span class="pcard-icon">🌐</span><div class="pcard-name">UNWTO</div><div class="pcard-type">World Tourism Organization</div></div>
+    <div class="pcard"><span class="pcard-icon">🎓</span><div class="pcard-name">ESCP Europe</div><div class="pcard-type">Business School</div></div>
+    <div class="pcard"><span class="pcard-icon">🎓</span><div class="pcard-name">Les Roches</div><div class="pcard-type">Hospitality School</div></div>
+    <div class="pcard"><span class="pcard-icon">🎓</span><div class="pcard-name">Univ. Europea de Madrid</div><div class="pcard-type">Laureate Universities</div></div>
+    <div class="pcard"><span class="pcard-icon">🎓</span><div class="pcard-name">CIOMIJAS</div><div class="pcard-type">Centro Andaluz de Formación</div></div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Ready to Work with The Emerald?</h2>
+  <p>Contact us to discuss your hospitality project and receive a personalised proposal from our team.</p>
+  <div class="cta-strip-actions">
+    <a class="btn btn-primary" href="contact.html">Get in Touch</a>
+    <a class="btn btn-outline-w" href="services.html">View Services</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-logo-wrap">
+        <div class="footer-gem"></div>
+        <div><div class="footer-brand">THE <span>EMERALD</span></div><div class="footer-tagline">4 Hospitality Management Consult</div></div>
+      </div>
+      <p class="footer-about">Strategic consultancy and management specializing in the hospitality industry. Local knowledge combined with international experience.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/ehospitalitymgt" target="_blank" class="fsoc" aria-label="Facebook">f</a>
+        <a href="mailto:md@emeraldkenya.com" class="fsoc" aria-label="Email">@</a>
+        <a href="https://www.emeraldkenya.com" target="_blank" class="fsoc" aria-label="Website">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="gallery.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-nav"><li><a href="services.html#consulting">Market Analysis</a></li><li><a href="services.html#preopening">Pre-Opening Support</a></li><li><a href="services.html#management">Hotel Management</a></li><li><a href="services.html#training">Training Programs</a></li><li><a href="services.html#fb">F&amp;B Development</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-contact-list">
+        <li><span class="fci">📍</span>Mombasa, Kenya</li>
+        <li><span class="fci">📞</span><a href="tel:+254725865855">+254 725 865 855</a></li>
+        <li><span class="fci">✉️</span><a href="mailto:md@emeraldkenya.com">md@emeraldkenya.com</a></li>
+        <li><span class="fci">🌐</span><a href="https://www.emeraldkenya.com" target="_blank">emeraldkenya.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Emerald for Hospitality Management Dynamics Ltd. All rights reserved.</span>
+    <span>Incorporated in Kenya · PVT-5JUE7J58</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el){ ro.observe(el); });
+</script>
+</body>
+</html>
